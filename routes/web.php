@@ -23,9 +23,9 @@ Route::prefix('master-data')->group(function () {
         return view('pages.jadwal.index');
     })->name('master-data.jadwal');
 
-    // Route::get('user', function () {
-    //     return view('master-data.user');
-    // });
+    Route::get('user', function () {
+        return view('pages.user.index');
+    })->name('master-data.user');
 });
 
 // Route::get('history-presensi', function () {

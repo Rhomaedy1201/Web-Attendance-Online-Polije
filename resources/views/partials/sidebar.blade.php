@@ -43,8 +43,8 @@
                                     <span class="sub-item">Jadwal</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="../icon-menu.html">
+                            <li class="{{ Request::is('master-data/user') ? 'active' : '' }}">
+                                <a href="{{ route('master-data.user') }}">
                                     <span class="sub-item">User</span>
                                 </a>
                             </li>
