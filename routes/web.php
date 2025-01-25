@@ -11,9 +11,9 @@ Route::prefix('master-data')->group(function () {
         return view('pages.jurusan.index');
     })->name('master-data.jurusan');
 
-    // Route::get('prodi', function () {
-    //     return view('master-data.prodi');
-    // });
+    Route::get('prodi', function () {
+        return view('pages.prodi.index');
+    })->name('master-data.prodi');
 
     // Route::get('mata-kuliah', function () {
     //     return view('master-data.mata-kuliah');

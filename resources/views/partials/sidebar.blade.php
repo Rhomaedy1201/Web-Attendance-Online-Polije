@@ -24,12 +24,12 @@
                     <div class="collapse {{ Request::is('master-data/*') ? 'show' : '' }}" id="masterData">
                         <ul class="nav nav-collapse">
                             <li class="{{ Request::is('master-data/jurusan') ? 'active' : '' }}">
-                                <a href="{{ url('master-data/jurusan') }}">
+                                <a href="{{ route('master-data.jurusan') }}">
                                     <span class="sub-item">Jurusan</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="../overlay-sidebar.html">
+                            <li class="{{ Request::is('master-data/prodi') ? 'active' : '' }}">
+                                <a href="{{ route('master-data.prodi') }}">
                                     <span class="sub-item">Prodi</span>
                                 </a>
                             </li>
