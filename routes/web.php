@@ -28,6 +28,6 @@ Route::prefix('master-data')->group(function () {
     })->name('master-data.user');
 });
 
-// Route::get('history-presensi', function () {
-//     return view('history-presensi');
-// });
+Route::get('history-presensi', function () {
+    return view('pages.history_presensi.index');
+})->name('history-presensi');
