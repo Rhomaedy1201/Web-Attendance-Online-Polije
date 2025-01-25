@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Halaman Utama')
-
 @section('title_header', 'Dashboard')
+@section('desc_header', 'Dashboard')
 
 @section('content')
 	<div class="page-inner mt--5">
