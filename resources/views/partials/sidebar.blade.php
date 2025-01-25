@@ -33,8 +33,8 @@
                                     <span class="sub-item">Prodi</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="../compact-sidebar.html">
+                            <li class="{{ Request::is('master-data/mata-kuliah') ? 'active' : '' }}">
+                                <a href="{{ route('master-data.mata_kuliah') }}">
                                     <span class="sub-item">Mata Kuliah</span>
                                 </a>
                             </li>
