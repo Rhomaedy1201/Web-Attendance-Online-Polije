@@ -3,8 +3,8 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <ul class="nav nav-primary">
-                <li class="nav-item active">
-                    <a href="#">
+                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+                    <a href="{{ url('/') }}">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>
@@ -15,16 +15,16 @@
                     </span>
                     <h4 class="text-section">Master</h4>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('master-data/*') ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#masterData">
                         <i class="fas fa-database"></i>
                         <p>Master Data</p>
                         <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="masterData">
+                    <div class="collapse {{ Request::is('master-data/*') ? 'show' : '' }}" id="masterData">
                         <ul class="nav nav-collapse">
-                            <li>
-                                <a href="../sidebar-style-1.html">
+                            <li class="{{ Request::is('master-data/jurusan') ? 'active' : '' }}">
+                                <a href="{{ url('master-data/jurusan') }}">
                                     <span class="sub-item">Jurusan</span>
                                 </a>
                             </li>
