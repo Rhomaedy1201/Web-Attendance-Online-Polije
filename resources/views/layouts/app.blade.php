@@ -35,6 +35,7 @@
 								<h5 class="text-white op-7 mb-2">@yield('desc_header')</h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
+								@yield('btnAdd')
 							</div>
 						</div>
 					</div>
@@ -45,5 +46,6 @@
 		</div>
     </div>
 	@include('partials.scripts')
+	@stack('extraScript')
 </body>
 </html>
