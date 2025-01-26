@@ -41,7 +41,7 @@
 											</span>
 											Edit
 										</a>
-										<button class="btn btn-danger">
+										<button class="btn btn-danger" id="alert_warning">
 											<span class="btn-label">
 												<i class="far fa-trash-alt"></i>
 											</span>
@@ -60,4 +60,43 @@
 @endsection
 
 @push('extraScript')
+<script>
+	$('#alert_warning').click(function(e) {
+		swal({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			type: 'warning',
+			buttons:{
+				cancel: {
+					visible: true,
+					text : 'No, cancel!',
+					className: 'btn btn-danger'
+				},        			
+				confirm: {
+					text : 'Yes, delete it!',
+					className : 'btn btn-success'
+				}
+			}
+		}).then((willDelete) => {
+			if (willDelete) {
+				swal("Poof! Your imaginary file has been deleted!", {
+					icon: "success",
+					buttons : {
+						confirm : {
+							className: 'btn btn-success'
+						}
+					}
+				});
+			} else {
+				swal("Your imaginary file is safe!", {
+					buttons : {
+						confirm : {
+							className: 'btn btn-success'
+						}
+					}
+				});
+			}
+		});
+	})
+</script>
 @endpush
