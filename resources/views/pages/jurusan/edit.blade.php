@@ -2,7 +2,7 @@
 @section('title', 'Jurusan')
 @section('content')
 <div class="page-header">
-    <h4 class="page-title">Tambah Jurusan</h4>
+    <h4 class="page-title">Edit Jurusan</h4>
     <ul class="breadcrumbs">
         <li class="nav-home">
             <a href="{{ url('/') }}">
@@ -19,7 +19,7 @@
             <i class="flaticon-right-arrow"></i>
         </li>
         <li class="nav-item">
-            <a href="{{ route('master-data.jurusan.create') }}">Tambah Jurusan</a>
+            <a href="{{ route('master-data.jurusan.create') }}">Edit Jurusan</a>
         </li>
     </ul>
 </div>
@@ -27,14 +27,14 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <div class="card-title">Tambah</div>
+                <div class="card-title">Edit</div>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="kode">Kode Jurusan</label>
-                            <input type="text" class="form-control" id="kode" placeholder="Enter Kode Jurusan">
+                            <input type="text" class="form-control" id="kode" placeholder="Enter Kode Jurusan" value="{{ $jurusan }}">
                         </div>
                     </div>
                     <div class="col-md-6">

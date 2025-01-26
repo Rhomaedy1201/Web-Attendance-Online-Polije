@@ -35,12 +35,12 @@
 									<td>09366</td>
 									<td>Teknologi Informasi</td>
 									<td>
-										<button class="btn btn-warning">
+										<a href="{{ route('master-data.jurusan.edit', '10') }}" class="btn btn-warning">
 											<span class="btn-label">
 												<i class="fas fa-edit"></i>
 											</span>
 											Edit
-										</button>
+										</a>
 										<button class="btn btn-danger">
 											<span class="btn-label">
 												<i class="far fa-trash-alt"></i>

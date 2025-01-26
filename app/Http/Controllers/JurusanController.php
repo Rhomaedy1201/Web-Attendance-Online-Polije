@@ -27,7 +27,7 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 
     }
 
     /**
@@ -43,7 +43,8 @@ class JurusanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $jurusan = $id;
+        return view("pages.jurusan.edit", compact("jurusan"));
     }
 
     /**
