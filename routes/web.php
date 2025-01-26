@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JurusanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -7,9 +8,8 @@ Route::get('/', function () {
 });
 
 Route::prefix('master-data')->group(function () {
-    Route::get('jurusan', function () {
-        return view('pages.jurusan.index');
-    })->name('master-data.jurusan');
+    Route::get('jurusan', [JurusanController::class, 'index'])->name('master-data.jurusan');
+    Route::get('jurusan/create', [JurusanController::class, 'create'])->name('master-data.jurusan.create');
 
     Route::get('prodi', function () {
         return view('pages.prodi.index');

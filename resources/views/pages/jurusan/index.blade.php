@@ -4,7 +4,7 @@
 @section('title_header', 'Jurusan')
 @section('desc_header', 'Master Data / Jurusan')
 @section('btnAdd')
-<a href="#" class="btn btn-white btn-border btn-round mr-2">
+<a href="{{ route('master-data.jurusan.create') }}" class="btn btn-white btn-border btn-round mr-2">
 	<i class="fas fa-plus"></i>
 	Tambah Jurusan
 </a>

@@ -23,7 +23,7 @@
                     </a>
                     <div class="collapse {{ Request::is('master-data/*') ? 'show' : '' }}" id="masterData">
                         <ul class="nav nav-collapse">
-                            <li class="{{ Request::is('master-data/jurusan') ? 'active' : '' }}">
+                            <li class="{{ Request::is('master-data/jurusan') || Request::is('master-data/jurusan/*') ? 'active' : '' }}">
                                 <a href="{{ route('master-data.jurusan') }}">
                                     <span class="sub-item">Jurusan</span>
                                 </a>
