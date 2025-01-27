@@ -22,8 +22,8 @@ Route::prefix('master-data')->group(function () {
     
     // Matkul
     Route::get('matkul', [MatkulController::class, 'index'])->name('master-data.matkul');
-    Route::get('matkul/create', [MatkulController::class, 'create'])->name('master-data.matkul.crate');
-    Route::get('matkul/edit/{id}', [MatkulController::class, 'edit'])->name('master-data.matkul.crate');
+    Route::get('matkul/create', [MatkulController::class, 'create'])->name('master-data.matkul.create');
+    Route::get('matkul/edit/{id}', [MatkulController::class, 'edit'])->name('master-data.matkul.edit');
 
     Route::get('jadwal', function () {
         return view('pages.jadwal.index');
