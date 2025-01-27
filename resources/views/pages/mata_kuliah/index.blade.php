@@ -38,7 +38,7 @@
 									<td>4</td>
 									<td>Bu Vanny</td>
 									<td>
-										<a href="{{ route('master-data.prodi.edit', '10') }}" class="btn btn-warning">
+										<a href="{{ route('master-data.matkul.edit', '10') }}" class="btn btn-warning">
 											<span class="btn-label">
 												<i class="fas fa-edit"></i>
 											</span>
