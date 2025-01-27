@@ -52,8 +52,15 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="nama">Nama Dosen</label>
-                            <input type="email" class="form-control" id="nama" placeholder="Nama Dosen Koordinator">
+                            <label for="exampleFormControlSelect1">
+                                Dosen Koordinator @include('components.text-required')
+                            </label>
+                            <select class="form-control" id="exampleFormControlSelect1" required>
+                                <option value="null">-- Pilih Dosen --</option>
+                                <option value="388">Pak Ery</option>
+                                <option value="388">Bu Ratih</option>
+                                <option value="388">Bu Elly</option>
+                            </select>
                         </div>
                     </div>
                 </div>
