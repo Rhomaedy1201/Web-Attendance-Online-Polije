@@ -33,6 +33,11 @@
                                     <span class="sub-item">Prodi</span>
                                 </a>
                             </li>
+                            <li class="{{ Request::is('master-data/dosen') || Request::is('master-data/dosen/*') ? 'active' : '' }}">
+                                <a href="{{ route('master-data.dosen') }}">
+                                    <span class="sub-item">Dosen</span>
+                                </a>
+                            </li>
                             <li class="{{ Request::is('master-data/matkul') || Request::is('master-data/matkul/*') ? 'active' : '' }}">
                                 <a href="{{ route('master-data.matkul') }}">
                                     <span class="sub-item">Mata Kuliah</span>

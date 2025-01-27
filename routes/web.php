@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DosenController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\ProdiController;
@@ -19,6 +20,11 @@ Route::prefix('master-data')->group(function () {
     Route::get('prodi', [ProdiController::class, 'index'])->name('master-data.prodi');
     Route::get('prodi/create', [ProdiController::class, 'create'])->name('master-data.prodi.create');
     Route::get('prodi/edit/{id}', [ProdiController::class, 'edit'])->name('master-data.prodi.edit');
+
+    // Prodi
+    Route::get('dosen', [DosenController::class, 'index'])->name('master-data.dosen');
+    Route::get('dosen/create', [DosenController::class, 'create'])->name('master-data.dosen.create');
+    Route::get('dosen/edit/{id}', [DosenController::class, 'edit'])->name('master-data.dosen.edit');
     
     // Matkul
     Route::get('matkul', [MatkulController::class, 'index'])->name('master-data.matkul');
