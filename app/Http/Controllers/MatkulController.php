@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProdiController extends Controller
+class MatkulController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view("pages.prodi.index");
+        return view("pages.mata_kuliah.index");
     }
 
     /**
@@ -19,7 +19,7 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        return view("pages.prodi.create");
+        return view("pages.mata_kuliah.create");
     }
 
     /**
@@ -43,8 +43,7 @@ class ProdiController extends Controller
      */
     public function edit(string $id)
     {
-        $prodi = $id;
-        return view("pages.prodi.edit", compact("prodi"));
+        return view("pages.mata_kuliah.edit", compact("id"));
     }
 
     /**

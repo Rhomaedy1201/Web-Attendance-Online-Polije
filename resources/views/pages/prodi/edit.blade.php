@@ -38,7 +38,8 @@
                             </label>
                             <select class="form-control" id="exampleFormControlSelect1" required>
                                 <option value="null">-- Pilih Jurusan --</option>
-                                <option value="388">Teknologi Informasi</option>
+                                <option value="388" >Teknologi Informasi</option>
+                                <option value="388" selected>{{ $prodi }}</option>
                             </select>
                         </div>
                     </div>

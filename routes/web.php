@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\ProdiController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,10 +19,11 @@ Route::prefix('master-data')->group(function () {
     Route::get('prodi', [ProdiController::class, 'index'])->name('master-data.prodi');
     Route::get('prodi/create', [ProdiController::class, 'create'])->name('master-data.prodi.create');
     Route::get('prodi/edit/{id}', [ProdiController::class, 'edit'])->name('master-data.prodi.edit');
-
-    Route::get('mata-kuliah', function () {
-        return view('pages.mata_kuliah.index');
-    })->name('master-data.mata_kuliah');
+    
+    // Matkul
+    Route::get('matkul', [MatkulController::class, 'index'])->name('master-data.matkul');
+    Route::get('matkul/create', [MatkulController::class, 'create'])->name('master-data.matkul.crate');
+    Route::get('matkul/edit/{id}', [MatkulController::class, 'edit'])->name('master-data.matkul.crate');
 
     Route::get('jadwal', function () {
         return view('pages.jadwal.index');
