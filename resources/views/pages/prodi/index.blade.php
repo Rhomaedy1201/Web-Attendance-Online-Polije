@@ -38,7 +38,7 @@
 									<td>Teknik Informatika</td>
 									<td>Teknologi Informasi</td>
 									<td>
-										<a href="{{ route('master-data.jurusan.edit', '10') }}" class="btn btn-warning">
+										<a href="{{ route('master-data.prodi.edit', '10') }}" class="btn btn-warning">
 											<span class="btn-label">
 												<i class="fas fa-edit"></i>
 											</span>

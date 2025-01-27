@@ -17,6 +17,7 @@ Route::prefix('master-data')->group(function () {
     // Prodi
     Route::get('prodi', [ProdiController::class, 'index'])->name('master-data.prodi');
     Route::get('prodi/create', [ProdiController::class, 'create'])->name('master-data.prodi.create');
+    Route::get('prodi/edit/{id}', [ProdiController::class, 'edit'])->name('master-data.prodi.edit');
 
     Route::get('mata-kuliah', function () {
         return view('pages.mata_kuliah.index');

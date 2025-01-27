@@ -43,7 +43,8 @@ class ProdiController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $prodi = $id;
+        return view("pages.prodi.edit");
     }
 
     /**
