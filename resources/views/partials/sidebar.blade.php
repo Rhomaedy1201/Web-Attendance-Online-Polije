@@ -28,7 +28,7 @@
                                     <span class="sub-item">Jurusan</span>
                                 </a>
                             </li>
-                            <li class="{{ Request::is('master-data/prodi') ? 'active' : '' }}">
+                            <li class="{{ Request::is('master-data/prodi') || Request::is('master-data/prodi/*') ? 'active' : '' }}">
                                 <a href="{{ route('master-data.prodi') }}">
                                     <span class="sub-item">Prodi</span>
                                 </a>

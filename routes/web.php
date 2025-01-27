@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\ProdiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,13 +9,14 @@ Route::get('/', function () {
 });
 
 Route::prefix('master-data')->group(function () {
+    // Jurusan
     Route::get('jurusan', [JurusanController::class, 'index'])->name('master-data.jurusan');
     Route::get('jurusan/create', [JurusanController::class, 'create'])->name('master-data.jurusan.create');
     Route::get('jurusan/edit/{id}', [JurusanController::class, 'edit'])->name('master-data.jurusan.edit');
 
-    Route::get('prodi', function () {
-        return view('pages.prodi.index');
-    })->name('master-data.prodi');
+    // Prodi
+    Route::get('prodi', [ProdiController::class, 'index'])->name('master-data.prodi');
+    Route::get('prodi/create', [ProdiController::class, 'create'])->name('master-data.prodi.create');
 
     Route::get('mata-kuliah', function () {
         return view('pages.mata_kuliah.index');
