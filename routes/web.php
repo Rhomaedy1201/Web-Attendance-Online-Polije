@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\ProdiController;
@@ -31,9 +32,10 @@ Route::prefix('master-data')->group(function () {
     Route::get('matkul/create', [MatkulController::class, 'create'])->name('master-data.matkul.create');
     Route::get('matkul/edit/{id}', [MatkulController::class, 'edit'])->name('master-data.matkul.edit');
 
-    Route::get('jadwal', function () {
-        return view('pages.jadwal.index');
-    })->name('master-data.jadwal');
+    // Matkul
+    Route::get('jadwal', [JadwalController::class, 'index'])->name('master-data.jadwal');
+    Route::get('jadwal/create', [JadwalController::class, 'create'])->name('master-data.jadwal.create');
+    Route::get('jadwal/edit/{id}', [JadwalController::class, 'edit'])->name('master-data.jadwal.edit');
 
     Route::get('user', function () {
         return view('pages.user.index');
