@@ -58,8 +58,8 @@
                                     <span class="sub-item">Jadwal</span>
                                 </a>
                             </li>
-                            <li class="{{ Request::is('master-data/user') ? 'active' : '' }}">
-                                <a href="{{ route('master-data.user') }}">
+                            <li class="{{ Request::is('master-data/teknisi') || Request::is('master-data/teknisi/*') ? 'active' : '' }}">
+                                <a href="{{ route('master-data.teknisi') }}">
                                     <span class="sub-item">Teknisi</span>
                                 </a>
                             </li>

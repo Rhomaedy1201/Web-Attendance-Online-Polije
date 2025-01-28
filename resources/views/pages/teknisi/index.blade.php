@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Prodi')
-@section('title_header', 'Prodi')
-@section('desc_header', 'Master Data / Prodi')
+@section('title', 'Teknisi')
+@section('title_header', 'Teknisi')
+@section('desc_header', 'Master Data / Teknisi')
 
 @section('btnAdd')
-<a href="{{ route('master-data.prodi.create') }}" class="btn btn-white btn-border btn-round mr-2">
+<a href="{{ route('master-data.teknisi.create') }}" class="btn btn-white btn-border btn-round mr-2">
 	<i class="fas fa-plus"></i>
-	Tambah Prodi
+	Tambah Teknisi
 </a>
 @endsection
 
@@ -17,7 +17,7 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
-					<h4 class="card-title">Data Prodi</h4>
+					<h4 class="card-title">Data Teknisi</h4>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -25,20 +25,18 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>Kode Prodi</th>
-									<th>Nama Prodi</th>
-									<th>Nama Jurusan</th>
+									<th>Nip</th>
+									<th>Nama</th>
 									<th>Aksi</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>1</td>
-									<td>0937776</td>
-									<td>Teknik Informatika</td>
-									<td>Teknologi Informasi</td>
+									<td>1232423776</td>
+									<td>habibi</td>
 									<td>
-										<a href="{{ route('master-data.prodi.edit', '10') }}" class="btn btn-warning">
+										<a href="{{ route('master-data.teknisi.edit', '10') }}" class="btn btn-warning">
 											<span class="btn-label">
 												<i class="fas fa-edit"></i>
 											</span>

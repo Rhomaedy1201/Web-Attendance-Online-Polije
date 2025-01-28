@@ -7,6 +7,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\TeknisiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -48,6 +49,11 @@ Route::prefix('master-data')->group(function () {
     Route::get('jadwal', [JadwalController::class, 'index'])->name('master-data.jadwal');
     Route::get('jadwal/create', [JadwalController::class, 'create'])->name('master-data.jadwal.create');
     Route::get('jadwal/edit/{id}', [JadwalController::class, 'edit'])->name('master-data.jadwal.edit');
+
+    // Teknisi
+    Route::get('teknisi', [TeknisiController::class, 'index'])->name('master-data.teknisi');
+    Route::get('teknisi/create', [TeknisiController::class, 'create'])->name('master-data.teknisi.create');
+    Route::get('teknisi/edit/{id}', [TeknisiController::class, 'edit'])->name('master-data.teknisi.edit');
 
     Route::get('user', function () {
         return view('pages.user.index');
