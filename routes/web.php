@@ -4,6 +4,7 @@ use App\Http\Controllers\DosenController;
 use App\Http\Controllers\GolonganController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\RuanganController;
@@ -55,9 +56,11 @@ Route::prefix('master-data')->group(function () {
     Route::get('teknisi/create', [TeknisiController::class, 'create'])->name('master-data.teknisi.create');
     Route::get('teknisi/edit/{id}', [TeknisiController::class, 'edit'])->name('master-data.teknisi.edit');
 
-    Route::get('user', function () {
-        return view('pages.user.index');
-    })->name('master-data.user');
+    // Mahasiswa
+    Route::get('mahasiswa', [MahasiswaController::class, 'index'])->name('master-data.mahasiswa');
+    Route::get('mahasiswa/create', [MahasiswaController::class, 'create'])->name('master-data.mahasiswa.create');
+    Route::get('mahasiswa/edit/{id}', [MahasiswaController::class, 'edit'])->name('master-data.mahasiswa.edit');
+
 });
 
 Route::get('history-presensi', function () {
