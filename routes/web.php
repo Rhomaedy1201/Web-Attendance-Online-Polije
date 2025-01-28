@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\GolonganController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MatkulController;
@@ -37,6 +38,11 @@ Route::prefix('master-data')->group(function () {
     Route::get('ruangan', [RuanganController::class, 'index'])->name('master-data.ruangan');
     Route::get('ruangan/create', [RuanganController::class, 'create'])->name('master-data.ruangan.create');
     Route::get('ruangan/edit/{id}', [RuanganController::class, 'edit'])->name('master-data.ruangan.edit');
+
+    // GOlongan
+    Route::get('golongan', [GolonganController::class, 'index'])->name('master-data.golongan');
+    Route::get('golongan/create', [GolonganController::class, 'create'])->name('master-data.golongan.create');
+    Route::get('golongan/edit/{id}', [GolonganController::class, 'edit'])->name('master-data.golongan.edit');
 
     // Jadwal
     Route::get('jadwal', [JadwalController::class, 'index'])->name('master-data.jadwal');

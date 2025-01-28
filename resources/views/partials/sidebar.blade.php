@@ -48,8 +48,8 @@
                                     <span class="sub-item">Ruangan</span>
                                 </a>
                             </li>
-                            <li class="{{ Request::is('master-data/matkul') || Request::is('master-data/matkul/*') ? 'active' : '' }}">
-                                <a href="{{ route('master-data.matkul') }}">
+                            <li class="{{ Request::is('master-data/golongan') || Request::is('master-data/golongan/*') ? 'active' : '' }}">
+                                <a href="{{ route('master-data.golongan') }}">
                                     <span class="sub-item">Golongan</span>
                                 </a>
                             </li>
