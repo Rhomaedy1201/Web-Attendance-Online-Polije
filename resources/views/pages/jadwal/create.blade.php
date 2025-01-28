@@ -2,7 +2,7 @@
 @section('title', 'Prodi')
 @section('content')
 <div class="page-header">
-    <h4 class="page-title">Tambah Mata Kuliah</h4>
+    <h4 class="page-title">Tambah Jadwal</h4>
     <ul class="breadcrumbs">
         <li class="nav-home">
             <a href="{{ url('/') }}">
@@ -13,27 +13,16 @@
             <i class="flaticon-right-arrow"></i>
         </li>
         <li class="nav-item">
-            <a href="{{ route('master-data.matkul') }}">Mata Kuliah</a>
+            <a href="{{ route('master-data.jadwal') }}">Jadwal</a>
         </li>
         <li class="separator">
             <i class="flaticon-right-arrow"></i>
         </li>
         <li class="nav-item">
-            <a href="{{ route('master-data.matkul.create') }}">Tambah Mata Kuliah</a>
+            <a href="{{ route('master-data.jadwal.create') }}">Tambah Jadwal</a>
         </li>
     </ul>
 </div>
-{{-- <tr>
-    <th>Hari</th>
-    <th>Jam Masuk</th>
-    <th>Toleransi Masuk</th>
-    <th>Jam Selesai</th>
-    <th>Durasi</th>
-    <th>Mata Kuliah</th>
-    <th>Ruang</th>
-    <th>Dosen Koordinator</th>
-    <th>Aksi</th>
-</tr> --}}
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -45,10 +34,10 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">
-                                Jurusan @include('components.text-required')
+                                Prodi @include('components.text-required')
                             </label>
                             <select class="form-control" id="exampleFormControlSelect1" required>
-                                <option value="null">-- Jurusan --</option>
+                                <option value="null">-- Pilih Prodi --</option>
                                 <option value="388">Senin</option>
                                 <option value="388">Selesa</option>
                                 <option value="388">Rabu</option>
@@ -383,16 +372,18 @@
                         +
                     </button>
                     <br>
-                    <button class="btn btn-danger mt-2" id="remove-content-${idCard}">
+                    <button class="btn btn-danger mt-2 remove-content" data-id="${idCard}">
                         -
                     </button>
                 </div>
             </div>
         `);
+        idCard++;
     });
 
-    $('#content-dynamis').on('click', '#remove-content-'+idCard, function(){
-        $('#card-'+idCard).remove();
+    $('#content-dynamis').on('click', '.remove-content', function () {
+        var idToRemove = $(this).data('id');
+        $('#card-' + idToRemove).remove();
     });
 </script>
 @endpush
