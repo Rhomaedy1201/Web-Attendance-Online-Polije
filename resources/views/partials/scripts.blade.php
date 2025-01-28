@@ -36,9 +36,11 @@
 <!-- Atlantis JS -->
 <script src="{{ asset('template/assets/js/atlantis.min.js')}}"></script>
 
-<!-- Atlantis DEMO methods, don't include it in your project! -->
-{{-- <script src="{{ asset('template/assets/js/setting-demo.js')}}"></script> --}}
-{{-- <script src="{{ asset('template/assets/js/demo.js')}}"></script> --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
 <script>
     Circles.create({
         id:'circles-1',

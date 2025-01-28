@@ -43,7 +43,7 @@
                                     <span class="sub-item">Mata Kuliah</span>
                                 </a>
                             </li>
-                            <li class="{{ Request::is('master-data/jadwal') ? 'active' : '' }}">
+                            <li class="{{ Request::is('master-data/jadwal') || Request::is('master-data/jadwal/*') ? 'active' : '' }}">
                                 <a href="{{ route('master-data.jadwal') }}">
                                     <span class="sub-item">Jadwal</span>
                                 </a>
