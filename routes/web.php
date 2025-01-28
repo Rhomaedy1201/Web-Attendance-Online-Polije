@@ -5,6 +5,7 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\RuanganController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,7 +33,12 @@ Route::prefix('master-data')->group(function () {
     Route::get('matkul/create', [MatkulController::class, 'create'])->name('master-data.matkul.create');
     Route::get('matkul/edit/{id}', [MatkulController::class, 'edit'])->name('master-data.matkul.edit');
 
-    // Matkul
+    // Ruangan
+    Route::get('ruangan', [RuanganController::class, 'index'])->name('master-data.ruangan');
+    Route::get('ruangan/create', [RuanganController::class, 'create'])->name('master-data.ruangan.create');
+    Route::get('ruangan/edit/{id}', [RuanganController::class, 'edit'])->name('master-data.ruangan.edit');
+
+    // Jadwal
     Route::get('jadwal', [JadwalController::class, 'index'])->name('master-data.jadwal');
     Route::get('jadwal/create', [JadwalController::class, 'create'])->name('master-data.jadwal.create');
     Route::get('jadwal/edit/{id}', [JadwalController::class, 'edit'])->name('master-data.jadwal.edit');
