@@ -95,7 +95,7 @@
 									<td>Gedung Teknologi Informatika - Kelas 3.12</td>
 									<td>Bu Vany</td>
 									<td>
-										<a href="{{ route('master-data.matkul.edit', '10') }}" class="btn btn-warning">
+										<a href="{{ route('master-data.jadwal.edit', '10') }}" class="btn btn-warning">
 											<span class="btn-label">
 												<i class="fas fa-edit"></i>
 											</span>
@@ -119,7 +119,7 @@
 									<td>Gedung Teknologi Informatika - Lantai 4</td>
 									<td>Pak Denny</td>
 									<td>
-										<a href="{{ route('master-data.matkul.edit', '10') }}" class="btn btn-warning">
+										<a href="{{ route('master-data.jadwal.edit', '10') }}" class="btn btn-warning">
 											<span class="btn-label">
 												<i class="fas fa-edit"></i>
 											</span>

@@ -2,7 +2,7 @@
 @section('title', 'Prodi')
 @section('content')
 <div class="page-header">
-    <h4 class="page-title">Edit Mata Kuliah</h4>
+    <h4 class="page-title">Edit Jadwal</h4>
     <ul class="breadcrumbs">
         <li class="nav-home">
             <a href="{{ url('/') }}">
@@ -13,13 +13,13 @@
             <i class="flaticon-right-arrow"></i>
         </li>
         <li class="nav-item">
-            <a href="{{ route('master-data.matkul') }}">Mata Kuliah</a>
+            <a href="{{ route('master-data.jadwal') }}">Jadwal</a>
         </li>
         <li class="separator">
             <i class="flaticon-right-arrow"></i>
         </li>
         <li class="nav-item">
-            <a href="{{ route('master-data.matkul.edit', '10') }}">Edit Mata Kuliah</a>
+            <a href="{{ route('master-data.jadwal.edit', '10') }}">Edit Jadwal</a>
         </li>
     </ul>
 </div>
@@ -34,7 +34,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="kode">Nama</label>
-                            <input type="text" class="form-control" id="kode" placeholder="Nama Mata Kuliah" value="{{ $id }}">
+                            <input type="text" class="form-control" id="kode" placeholder="Nama Jadwal" value="{{ $id }}">
                         </div>
                     </div>
                     <div class="col-md-6">
