@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -16,12 +17,20 @@ return new class extends Migration {
             $table->enum('jk', ['L', 'P']);
             $table->string('alamat');
             $table->char('telp', 12);
-            $table->char('telp', 12);
+            $table->char('golongan', 1);
+            $table->char('angkatan', 4);
+            $table->char('semester_sekarang', 2);
+            $table->string('semester_tempuh');
             $table->timestamps();
 
             $table->foreign('kode_prodi')
                 ->references('kode_prodi')
                 ->on('mst_prodi')
+                ->onUpdate('cascade');
+
+            $table->foreign('golongan')
+                ->references('golongan')
+                ->on('mst_golongan')
                 ->onUpdate('cascade');
         });
     }
