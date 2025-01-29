@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('pages.dashboard.index');
 });
 
+Route::get('/login', function () {
+    return view('pages.auth.index');
+});
+
 Route::prefix('master-data')->group(function () {
     // Jurusan
     Route::get('jurusan', [JurusanController::class, 'index'])->name('master-data.jurusan');
