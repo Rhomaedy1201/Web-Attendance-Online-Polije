@@ -33,11 +33,59 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label for="Nim">Nim</label>
+                            <input type="text" class="form-control" id="Nim" placeholder="Enter Nim">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Nama">Nama</label>
+                            <input type="text" class="form-control" id="nama" placeholder="Enter Nama">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label for="exampleFormControlSelect1">
-                                Nama Gedung @include('components.text-required')
+                                Jenis Kelamin @include('components.text-required')
                             </label>
                             <select class="form-control" id="exampleFormControlSelect1" required>
-                                <option value="null">-- Pilih Gedung --</option>
+                                <option value="null">-- Pilih --</option>
+                                <option value="P">Perempuan</option>
+                                <option value="L">Laki-laki</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Alamat">Alamat</label>
+                            <input type="text" class="form-control" id="Alamat" placeholder="Enter Alamat">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Telp">Telp</label>
+                            <input type="text" class="form-control" id="Telp" placeholder="Enter Telp">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">
+                                Angkatan @include('components.text-required')
+                            </label>
+                            <select class="form-control" id="exampleFormControlSelect1" required>
+                                <option value="null">-- Pilih Angkatan --</option>
+                                <option value="388">2020</option>
+                                <option value="388">2021</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">
+                                Nama Prodi @include('components.text-required')
+                            </label>
+                            <select class="form-control" id="exampleFormControlSelect1" required>
+                                <option value="null">-- Pilih Prodi --</option>
                                 <option value="388">Teknologi Informasi</option>
                             </select>
                         </div>

@@ -25,16 +25,30 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>Nama Gedung</th>
-									<th>Nama Kelas</th>
+									<th>NIM</th>
+									<th>Nama</th>
+									<th>JK</th>
+									<th>Alamat</th>
+									<th>Telp</th>
+									<th>Gol</th>
+									<th>Angkatan</th>
+									<th>Semester</th>
+									<th>Prodi</th>
 									<th>Aksi</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>1</td>
-									<td>Teknologi Informasi</td>
-									<td>4.13</td>
+									<td>E41211041</td>
+									<td>Muhamad Rhomaedi</td>
+									<td>Laki-laki</td>
+									<td>Bondowoso</td>
+									<td>085678098765</td>
+									<td>C</td>
+									<td>2021</td>
+									<td>8</td>
+									<td>Teknik Informatika</td>
 									<td>
 										<button class="btn btn-primary" id="alert_warning">
 											<span class="btn-label">

@@ -63,7 +63,7 @@
                                     <span class="sub-item">Teknisi</span>
                                 </a>
                             </li>
-                            <li class="{{ Request::is('master-data/mahasiswa') ? 'active' : '' }}">
+                            <li class="{{ Request::is('master-data/mahasiswa') || Request::is('master-data/mahasiswa/*') ? 'active' : '' }}">
                                 <a href="{{ route('master-data.mahasiswa') }}">
                                     <span class="sub-item">Mahasiswa</span>
                                 </a>
