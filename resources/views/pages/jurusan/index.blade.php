@@ -19,84 +19,86 @@
 					<h4 class="card-title">Data Jurusan</h4>
 				</div>
 				<div class="card-body">
-					<div class="table-responsive">
-						<table id="basic-datatables" class="display table table-striped table-hover">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>Kode Jurusan</th>
-									<th>Nama Jurusan</th>
-									<th>Aksi</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>09366</td>
-									<td>Teknologi Informasi</td>
-									<td>
-										<a href="{{ route('master-data.jurusan.edit', '10') }}" class="btn btn-warning">
-											<span class="btn-label">
-												<i class="fas fa-edit"></i>
-											</span>
-											Edit
-										</a>
-										<button class="btn btn-danger" id="alert_warning">
-											<span class="btn-label">
-												<i class="far fa-trash-alt"></i>
-											</span>
-											Hapus
-										</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+					<form id="form" method="get">
+						<div class="table-responsive">
+							<div class="row">
+								<div class="col-md-10">
+									<div class="d-flex align-items-center gap-8">
+										<label for="page_length" class="mb-0">Show</label>
+										<select name="page_length" class="form-select form-select-sm w-auto" id="page_length">
+											<option value="1" 
+												@isset($_GET['page_length']) {{ $_GET['page_length']== 1 ? 'selected' : '' }} @endisset>
+												1</option>
+											<option value="5" 
+												@isset($_GET['page_length']) {{ $_GET['page_length']== 5 ? 'selected' : '' }} @endisset>
+												5</option>
+										</select>
+										<label for="page_length" class="mb-0">entries</label>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="input-icon">
+										<input type="text" class="form-control" placeholder="Search..." name="search"
+										value="{{ isset($_GET['search']) ? $_GET['search'] : '' }}">
+										<span class="input-icon-addon">
+											<i class="fa fa-search"></i>
+										</span>
+									</div>
+								</div>
+							</div>
+							<table id="basic-datatables" class="display table table-striped table-hover">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Kode Jurusan</th>
+										<th>Nama Jurusan</th>
+										<th>Aksi</th>
+									</tr>
+								</thead>
+								<tbody>
+									@php
+									$no = 1;
+									$page_length = isset($_GET['page_length']) ? $_GET['page_length'] : 1;
+									@endphp
+									@foreach ($jurusan as $item)
+									<tr>
+										<td>{{ $no++ }}</td>
+										<td>{{ $item->kode_jurusan }}</td>
+										<td>{{ $item->nama }}</td>
+										<td>
+											<a href="{{ route('master-data.jurusan.edit', '10') }}"
+												class="btn btn-warning">
+												<span class="btn-label">
+													<i class="fas fa-edit"></i>
+												</span>
+												Edit
+											</a>
+											<button class="btn btn-danger" id="alert_warning">
+												<span class="btn-label">
+													<i class="far fa-trash-alt"></i>
+												</span>
+												Hapus
+											</button>
+										</td>
+									</tr>
+									@endforeach
+								</tbody>
+							</table>
+							<nav aria-label="Page navigation example">
+								{{ $jurusan->links('pagination::bootstrap-5') }}
+							</nav>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 @endsection
-
 @push('extraScript')
-<script>
-	$('#alert_warning').click(function(e) {
-		swal({
-			title: 'Are you sure?',
-			text: "You won't be able to revert this!",
-			type: 'warning',
-			buttons:{
-				cancel: {
-					visible: true,
-					text : 'No, cancel!',
-					className: 'btn btn-danger'
-				},        			
-				confirm: {
-					text : 'Yes, delete it!',
-					className : 'btn btn-success'
-				}
-			}
-		}).then((willDelete) => {
-			if (willDelete) {
-				swal("Poof! Your imaginary file has been deleted!", {
-					icon: "success",
-					buttons : {
-						confirm : {
-							className: 'btn btn-success'
-						}
-					}
-				});
-			} else {
-				swal("Your imaginary file is safe!", {
-					buttons : {
-						confirm : {
-							className: 'btn btn-success'
-						}
-					}
-				});
-			}
-		});
-	})
-</script>
+    <script>
+        $('#page_length').on('change', function() {
+            $('#form').submit();
+        })
+    </script>
 @endpush

@@ -2,16 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\JurusanRepository;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class JurusanController extends Controller
 {
+
+    public $param;
+    public function __construct()
+    {
+        $this->param = new JurusanRepository();
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view("pages.jurusan.index");
+        $limit = $request->has('page_length') ? $request->get('page_length') : 1;
+        $search = $request->has('search') ? $request->get('search') : null;
+        $jurusan = $this->param->getJurusan($search, $limit);
+        return view("pages.jurusan.index", ["jurusan" => $jurusan]);
     }
 
     /**
@@ -27,7 +41,22 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        // 
+        try {
+            $data = $request->validate([
+                'kode_jurusan' => 'required|string',
+                'nama' => 'required|string',
+            ]);
+            
+            $this->param->store($data);
+            Alert::success("Berhasil", "Data Berhasil di simpan.");
+            return redirect()->route("master-data.jurusan");
+        } catch (Exception $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        } catch (QueryException $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        }
     }
 
     /**

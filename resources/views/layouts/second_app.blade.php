@@ -39,5 +39,6 @@
     </div>
 	@include('partials.scripts')
 	@stack('extraScript')
+	@include('sweetalert::alert')
 </body>
 </html>

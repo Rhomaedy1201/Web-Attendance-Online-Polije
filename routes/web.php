@@ -12,12 +12,12 @@ use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\TeknisiController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {
+Route::middleware(['guest', 'web'])->group(function () {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.action');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','web'])->group(function () {
     
     Route::get('/', function () {
         return view('pages.dashboard.index');
@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('master-data')->group(function () {
         // Jurusan
         Route::get('jurusan', [JurusanController::class, 'index'])->name('master-data.jurusan');
+        Route::post('jurusan', [JurusanController::class, 'store'])->name('master-data.jurusan.store');
         Route::get('jurusan/create', [JurusanController::class, 'create'])->name('master-data.jurusan.create');
         Route::get('jurusan/edit/{id}', [JurusanController::class, 'edit'])->name('master-data.jurusan.edit');
     
