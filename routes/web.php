@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/login', function () {
     return view('pages.auth.index');
-});
+})->name('login');
 
 Route::prefix('master-data')->group(function () {
     // Jurusan

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->char('kode_jurusan', 6);
             $table->String('nama', 120);
             $table->timestamps();
-            
+
             $table->foreign('kode_jurusan')
                 ->references('kode_jurusan')
                 ->on('mst_jurusan')
@@ -33,16 +33,3 @@ return new class extends Migration
         Schema::dropIfExists('mst_prodi');
     }
 };
-
-// Schema::create('mahasiswa_detail', function (Blueprint $table) {
-//     $table->id();
-//     $table->foreign('kode_prodi')
-//         ->references('kode_prodi')
-//         ->on('mst_prodi')
-//         ->onUpdate('cascade');
-//     $table->enum('jk', ['L','P']);
-//     $table->string('alamat');
-//     $table->char('telp', 12);
-//     $table->char('telp', 12);
-//     $table->timestamps();
-// });
