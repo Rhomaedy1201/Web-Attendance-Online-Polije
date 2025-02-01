@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('pages.dashboard.index');
     });
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     
     Route::prefix('master-data')->group(function () {
         // Jurusan

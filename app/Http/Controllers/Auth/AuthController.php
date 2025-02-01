@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
@@ -39,6 +40,19 @@ class AuthController extends Controller
             Log::error("Error saat login: ".$e->getMessage());
 
             return redirect()->route("login")->with("error", "Terjadi kesalahan sistem. Silahkan coba lagi.");
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        try {
+            Auth::logout();
+            $request->session()->invalidate();
+            // DB::table('sessions')->where('user_id', Auth::user()->nip)->delete();
+            $request->session()->regenerateToken();
+            return redirect()->route('login');
+        } catch (Exception $e) {
+            Log::error("Error saat login: ".$e->getMessage());
         }
     }
 }
