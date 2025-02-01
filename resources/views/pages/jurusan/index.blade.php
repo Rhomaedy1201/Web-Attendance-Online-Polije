@@ -74,7 +74,7 @@
 										<td>{{ $item->kode_jurusan }}</td>
 										<td>{{ $item->nama }}</td>
 										<td>
-											<a href="{{ route('master-data.jurusan.edit', '10') }}"
+											<a href="{{ route('master-data.jurusan.edit', $item->id) }}"
 												class="btn btn-warning">
 												<span class="btn-label">
 													<i class="fas fa-edit"></i>

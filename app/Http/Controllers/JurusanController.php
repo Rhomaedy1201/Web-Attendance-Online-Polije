@@ -12,9 +12,9 @@ class JurusanController extends Controller
 {
 
     public $param;
-    public function __construct()
+    public function __construct(JurusanRepository $jurusan)
     {
-        $this->param = new JurusanRepository();
+        $this->param = $jurusan;
     }
 
     /**
@@ -72,7 +72,7 @@ class JurusanController extends Controller
      */
     public function edit(string $id)
     {
-        $jurusan = $id;
+        $jurusan = $this->param->edit($id);
         return view("pages.jurusan.edit", compact("jurusan"));
     }
 
@@ -81,7 +81,22 @@ class JurusanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $data = $request->validate([
+                'kode_jurusan' => 'required|string',
+                'nama' => 'required|string',
+            ]);
+            
+            $this->param->update($data, $id);
+            Alert::success("Berhasil", "Data Berhasil di Edit.");
+            return redirect()->route("master-data.jurusan");
+        } catch (Exception $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        } catch (QueryException $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        }
     }
 
     /**

@@ -3,28 +3,18 @@
 namespace App\Repositories;
 
 use App\Models\Jurusan;
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 //use Your Model
 
 /**
  * Class JurusanRepository.
  */
-class JurusanRepository extends BaseRepository
+class JurusanRepository 
 {
-    // protected $model;
+    protected $model;
 
-    // public function __construct(Jurusan $jurusan)
-    // {
-    //     $this->model = $jurusan;
-    // }
-
-    /**
-     * @return string
-     *  Return the model
-     */
-    public function model()
+    public function __construct(Jurusan $jurusan)
     {
-        return Jurusan::class;
+        $this->model = $jurusan;
     }
 
     public function getJurusan($search, $limit=5){
@@ -35,9 +25,23 @@ class JurusanRepository extends BaseRepository
         return $jurusan;
     }
 
+    public function edit($id)
+    {
+        $jurusan = $this->model->find($id);
+        return $jurusan;
+    }
+
     public function store(array $data)
     {
-        return $this->model()::create([
+        return $this->model->create([
+            "kode_jurusan"=> $data["kode_jurusan"],
+            "nama"=> $data["nama"],
+        ]);
+    }
+
+    public function update(array $data, $id)
+    {
+        return $this->model->where('id', $id)->update([
             "kode_jurusan"=> $data["kode_jurusan"],
             "nama"=> $data["nama"],
         ]);

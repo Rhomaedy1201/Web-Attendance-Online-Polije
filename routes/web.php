@@ -31,6 +31,7 @@ Route::middleware(['auth','web'])->group(function () {
         Route::post('jurusan', [JurusanController::class, 'store'])->name('master-data.jurusan.store');
         Route::get('jurusan/create', [JurusanController::class, 'create'])->name('master-data.jurusan.create');
         Route::get('jurusan/edit/{id}', [JurusanController::class, 'edit'])->name('master-data.jurusan.edit');
+        Route::put('jurusan/update/{id}', [JurusanController::class, 'update'])->name('master-data.jurusan.update');
     
         // Prodi
         Route::get('prodi', [ProdiController::class, 'index'])->name('master-data.prodi');
