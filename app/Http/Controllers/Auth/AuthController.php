@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
+
+    public function index()
+    {
+        return view("pages.auth.index");
+    }
+    
     public function login(Request $request)
     {
         try {
