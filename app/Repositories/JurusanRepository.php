@@ -27,7 +27,7 @@ class JurusanRepository extends BaseRepository
         return Jurusan::class;
     }
 
-    public function getJurusan($search, $limit=1){
+    public function getJurusan($search, $limit=5){
         $search = strtolower($search);
         $jurusan = $this->model->where("kode_jurusan","like","%".$search."%")
         ->orWhere( "nama","like","%".$search."%")

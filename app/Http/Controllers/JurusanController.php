@@ -22,7 +22,7 @@ class JurusanController extends Controller
      */
     public function index(Request $request)
     {
-        $limit = $request->has('page_length') ? $request->get('page_length') : 1;
+        $limit = $request->has('page_length') ? $request->get('page_length') : 5;
         $search = $request->has('search') ? $request->get('search') : null;
         $jurusan = $this->param->getJurusan($search, $limit);
         return view("pages.jurusan.index", ["jurusan" => $jurusan]);

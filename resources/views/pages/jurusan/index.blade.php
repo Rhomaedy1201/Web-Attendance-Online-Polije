@@ -26,12 +26,18 @@
 									<div class="d-flex align-items-center gap-8">
 										<label for="page_length" class="mb-0">Show</label>
 										<select name="page_length" class="form-select form-select-sm w-auto" id="page_length">
-											<option value="1" 
-												@isset($_GET['page_length']) {{ $_GET['page_length']== 1 ? 'selected' : '' }} @endisset>
-												1</option>
 											<option value="5" 
 												@isset($_GET['page_length']) {{ $_GET['page_length']== 5 ? 'selected' : '' }} @endisset>
 												5</option>
+											<option value="10" 
+												@isset($_GET['page_length']) {{ $_GET['page_length']== 10 ? 'selected' : '' }} @endisset>
+												10</option>
+											<option value="20" 
+												@isset($_GET['page_length']) {{ $_GET['page_length']== 20 ? 'selected' : '' }} @endisset>
+												20</option>
+											<option value="50" 
+												@isset($_GET['page_length']) {{ $_GET['page_length']== 50 ? 'selected' : '' }} @endisset>
+												50</option>
 										</select>
 										<label for="page_length" class="mb-0">entries</label>
 									</div>
@@ -49,7 +55,7 @@
 							<table id="basic-datatables" class="display table table-striped table-hover">
 								<thead>
 									<tr>
-										<th>#</th>
+										<th>No.</th>
 										<th>Kode Jurusan</th>
 										<th>Nama Jurusan</th>
 										<th>Aksi</th>
@@ -57,12 +63,14 @@
 								</thead>
 								<tbody>
 									@php
-									$no = 1;
-									$page_length = isset($_GET['page_length']) ? $_GET['page_length'] : 1;
+									// $no = 1;
+									$page = isset($_GET['page']) ? $_GET['page'] : 1;
+									$page_length = isset($_GET['page_length']) ? $_GET['page_length'] : 5;
+									$i = $page == 1 ? 1 : $page * $page_length - $page_length + 1;
 									@endphp
 									@foreach ($jurusan as $item)
 									<tr>
-										<td>{{ $no++ }}</td>
+										<td>{{ $i++ }}</td>
 										<td>{{ $item->kode_jurusan }}</td>
 										<td>{{ $item->nama }}</td>
 										<td>
