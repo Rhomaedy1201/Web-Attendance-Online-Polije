@@ -52,18 +52,27 @@ Route::middleware(['auth','web'])->group(function () {
         
         // Matkul
         Route::get('matkul', [MatkulController::class, 'index'])->name('master-data.matkul');
+        Route::post('matkul', [MatkulController::class, 'store'])->name('master-data.matkul.store');
         Route::get('matkul/create', [MatkulController::class, 'create'])->name('master-data.matkul.create');
         Route::get('matkul/edit/{id}', [MatkulController::class, 'edit'])->name('master-data.matkul.edit');
+        Route::put('matkul/update/{id}', [MatkulController::class, 'update'])->name('master-data.matkul.update');
+        Route::post('matkul/delete', [MatkulController::class, 'destroy'])->name('master-data.matkul.delete');
     
         // Ruangan
         Route::get('ruangan', [RuanganController::class, 'index'])->name('master-data.ruangan');
+        Route::post('ruangan', [RuanganController::class, 'store'])->name('master-data.ruangan.store');
         Route::get('ruangan/create', [RuanganController::class, 'create'])->name('master-data.ruangan.create');
         Route::get('ruangan/edit/{id}', [RuanganController::class, 'edit'])->name('master-data.ruangan.edit');
+        Route::put('ruangan/update/{id}', [RuanganController::class, 'update'])->name('master-data.ruangan.update');
+        Route::post('ruangan/delete', [RuanganController::class, 'destroy'])->name('master-data.ruangan.delete');
     
         // GOlongan
         Route::get('golongan', [GolonganController::class, 'index'])->name('master-data.golongan');
+        Route::post('golongan', [GolonganController::class, 'store'])->name('master-data.golongan.store');
         Route::get('golongan/create', [GolonganController::class, 'create'])->name('master-data.golongan.create');
         Route::get('golongan/edit/{id}', [GolonganController::class, 'edit'])->name('master-data.golongan.edit');
+        Route::put('golongan/update/{id}', [GolonganController::class, 'update'])->name('master-data.golongan.update');
+        Route::post('golongan/delete', [GolonganController::class, 'destroy'])->name('master-data.golongan.delete');
     
         // Jadwal
         Route::get('jadwal', [JadwalController::class, 'index'])->name('master-data.jadwal');

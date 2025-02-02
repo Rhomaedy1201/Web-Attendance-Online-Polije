@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mahasiswa_detail', function (Blueprint $table) {
-            $table->id();
+            $table->char('nim', 9);
             $table->char('kode_prodi', 6);
             $table->enum('jk', ['L', 'P']);
             $table->string('alamat');
@@ -32,6 +32,12 @@ return new class extends Migration
                 ->references('golongan')
                 ->on('mst_golongan')
                 ->onUpdate('cascade');
+
+            $table->foreign('nim')
+                ->references('nim')
+                ->on('mahasiswa')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

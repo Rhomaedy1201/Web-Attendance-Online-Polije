@@ -16,6 +16,11 @@ class MataKuliah extends Model
         'id_dosen',
     ];
 
+    public function prodi()
+    {
+        return $this->belongsTo(Prodi::class, 'kode_prodi','kode_prodi');
+    }
+
     public function dosen()
     {
         return $this->belongsTo(Dosen::class, 'id_dosen','id');

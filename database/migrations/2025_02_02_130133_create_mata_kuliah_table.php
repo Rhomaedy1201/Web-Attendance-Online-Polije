@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('mata_kuliah', function (Blueprint $table) {
             $table->id();
-            $table->char('kode_prodi', 6)->unique();
+            $table->char('kode_prodi', 6);
             $table->string('nama',150);
             $table->string('sks',3);
-            $table->unsignedBigInteger('id_dosen')->unique();
+            $table->unsignedBigInteger('id_dosen');
             $table->timestamps();
 
             $table->foreign('kode_prodi')

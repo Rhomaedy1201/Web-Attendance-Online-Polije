@@ -19,10 +19,10 @@ class DosenRepository
 
     public function getAllDosens($search, $limit=5){
         $search = strtolower($search);
-        $jurusan = $this->model->where("nip","like","%".$search."%")
+        $dosen = $this->model->where("nip","like","%".$search."%")
         ->orWhere( "nama","like","%".$search."%")
         ->paginate($limit);
-        return $jurusan;
+        return $dosen;
     }
     public function store(array $data){
         return $this->model->create([
