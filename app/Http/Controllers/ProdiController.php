@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
+use App\Repositories\ProdiRepository;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProdiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public $param;
+    public function __construct(ProdiRepository $prodi)
+    {
+        $this->param = $prodi;
+    }
+
     public function index()
     {
         return view("pages.prodi.index");
@@ -19,7 +27,8 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        return view("pages.prodi.create");
+        $jurusan = Jurusan::get();
+        return view("pages.prodi.create",  compact('jurusan'));
     }
 
     /**
@@ -27,7 +36,23 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $data = $request->validate([
+                'kode_prodi' => 'required|string',
+                'kode_jurusan' => 'required|string',
+                'nama' => 'required|string',
+            ]);
+            
+            $this->param->store($data);
+            Alert::success("Berhasil", "Data Berhasil di simpan.");
+            return redirect()->route("master-data.prodi");
+        } catch (Exception $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        } catch (QueryException $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        }
     }
 
     /**
