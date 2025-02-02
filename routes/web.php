@@ -39,6 +39,7 @@ Route::middleware(['auth','web'])->group(function () {
         Route::post('prodi', [ProdiController::class, 'store'])->name('master-data.prodi.store');
         Route::get('prodi/create', [ProdiController::class, 'create'])->name('master-data.prodi.create');
         Route::get('prodi/edit/{id}', [ProdiController::class, 'edit'])->name('master-data.prodi.edit');
+        Route::put('prodi/update/{id}', [ProdiController::class, 'update'])->name('master-data.prodi.update');
     
         // Prodi
         Route::get('dosen', [DosenController::class, 'index'])->name('master-data.dosen');

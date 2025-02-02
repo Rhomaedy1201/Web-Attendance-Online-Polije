@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
+use App\Models\Prodi;
 use App\Repositories\ProdiRepository;
 use Exception;
 use Illuminate\Database\QueryException;
@@ -17,9 +18,12 @@ class ProdiController extends Controller
         $this->param = $prodi;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view("pages.prodi.index");
+        $limit = $request->has('page_length') ? $request->get('page_length') : 5;
+        $search = $request->has('search') ? $request->get('search') : null;
+        $prodi = $this->param->getProdi($search, $limit);
+        return view("pages.prodi.index", ["prodi" => $prodi]);
     }
 
     /**
@@ -42,7 +46,7 @@ class ProdiController extends Controller
                 'kode_jurusan' => 'required|string',
                 'nama' => 'required|string',
             ]);
-            
+
             $this->param->store($data);
             Alert::success("Berhasil", "Data Berhasil di simpan.");
             return redirect()->route("master-data.prodi");
@@ -68,8 +72,12 @@ class ProdiController extends Controller
      */
     public function edit(string $id)
     {
-        $prodi = $id;
-        return view("pages.prodi.edit", compact("prodi"));
+        $jurusan = Jurusan::orderBy('nama', 'asc')->get();
+        $prodi = Prodi::findOrFail($id);
+        return view("pages.prodi.edit", [
+            "jurusan"=> $jurusan,
+            "prodi"=> $prodi
+        ]);
     }
 
     /**
@@ -77,7 +85,23 @@ class ProdiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $data = $request->validate([
+                'kode_prodi' => 'required|string',
+                'kode_jurusan' => 'required|string',
+                'nama' => 'required|string',
+            ]);
+
+            $this->param->update($data, $id);
+            Alert::success("Berhasil", "Data Berhasil di Edit.");
+            return redirect()->route("master-data.prodi");
+        } catch (Exception $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        } catch (QueryException $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        }
     }
 
     /**
