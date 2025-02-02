@@ -79,7 +79,7 @@
 											<td>{{ $item->nip }}</td>
 											<td>{{ $item->nama }}</td>
 											<td>
-												<a href="{{ route('master-data.dosen.edit', '10') }}" class="btn btn-warning">
+												<a href="{{ route('master-data.dosen.edit', $item->id) }}" class="btn btn-warning">
 													<span class="btn-label">
 														<i class="fas fa-edit"></i>
 													</span>
@@ -138,7 +138,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-							<form action="{{ route('master-data.jurusan.delete') }}" method="POST">
+							<form action="{{ route('master-data.dosen.delete') }}" method="POST">
 								@csrf
 								<input type="hidden" name="formId" value="${formId}">
 								<button type="submit" class="btn btn-danger">Delete</button>

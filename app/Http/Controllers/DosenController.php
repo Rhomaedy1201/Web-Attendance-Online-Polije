@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
 use App\Repositories\DosenRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -68,7 +69,8 @@ class DosenController extends Controller
      */
     public function edit(string $id)
     {
-        return view("pages.dosen.edit", compact("id"));
+        $dosen = Dosen::findOrFail( $id );
+        return view("pages.dosen.edit", compact("dosen"));
     }
 
     /**
@@ -76,44 +78,36 @@ class DosenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // try {
-        //     $data = $request->validate([
-        //         'kode_jurusan' => 'required|string',
-        //         'nama' => 'required|string',
-        //     ]);
+        try {
+            $data = $request->validate([
+                'nip' => 'required|string|size:18',
+                'nama' => 'required|string',
+            ]);
             
-        //     $this->param->store($data);
-        //     Alert::success("Berhasil", "Data Berhasil di simpan.");
-        //     return redirect()->route("master-data.jurusan");
-        // } catch (Exception $e) {
-        //     Alert::error("Terjadi Kesalahan", $e->getMessage());
-        //     return back();
-        // } catch (QueryException $e) {
-        //     Alert::error("Terjadi Kesalahan", $e->getMessage());
-        //     return back();
-        // }
+            $this->param->update($data, $id);
+            Alert::success("Berhasil", "Data Berhasil di Edit.");
+            return redirect()->route("master-data.dosen");
+        } catch (\Exception $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        } catch (QueryException $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        // try {
-        //     $data = $request->validate([
-        //         'kode_jurusan' => 'required|string',
-        //         'nama' => 'required|string',
-        //     ]);
-            
-        //     $this->param->store($data);
-        //     Alert::success("Berhasil", "Data Berhasil di simpan.");
-        //     return redirect()->route("master-data.jurusan");
-        // } catch (Exception $e) {
-        //     Alert::error("Terjadi Kesalahan", $e->getMessage());
-        //     return back();
-        // } catch (QueryException $e) {
-        //     Alert::error("Terjadi Kesalahan", $e->getMessage());
-        //     return back();
-        // }
+        try {
+            $this->param->destroy($request->formId);
+            Alert::success("Berhasil", "Data Berhasil di Hapus.");
+            return redirect()->route("master-data.dosen");
+        } catch (\Exception $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        } 
     }
 }

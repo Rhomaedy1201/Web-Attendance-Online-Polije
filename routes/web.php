@@ -47,6 +47,8 @@ Route::middleware(['auth','web'])->group(function () {
         Route::post('dosen', [DosenController::class, 'store'])->name('master-data.dosen.store');
         Route::get('dosen/create', [DosenController::class, 'create'])->name('master-data.dosen.create');
         Route::get('dosen/edit/{id}', [DosenController::class, 'edit'])->name('master-data.dosen.edit');
+        Route::put('dosen/update/{id}', [DosenController::class, 'update'])->name('master-data.dosen.update');
+        Route::post('dosen/delete', [DosenController::class, 'destroy'])->name('master-data.dosen.delete');
         
         // Matkul
         Route::get('matkul', [MatkulController::class, 'index'])->name('master-data.matkul');

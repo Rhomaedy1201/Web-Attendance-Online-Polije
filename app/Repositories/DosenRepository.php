@@ -30,4 +30,15 @@ class DosenRepository
             "nama"=> $data["nama"],
         ]);
     }
+
+    public function update(array $data, $id){
+        return $this->model->where('id', $id)->update([
+            "nip"=> $data["nip"],
+            "nama"=> $data["nama"],
+        ]);
+    }
+
+    public function destroy($id){
+        return $this->model->where("id", $id)->delete();
+    }
 }
