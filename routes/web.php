@@ -44,6 +44,7 @@ Route::middleware(['auth','web'])->group(function () {
     
         // Prodi
         Route::get('dosen', [DosenController::class, 'index'])->name('master-data.dosen');
+        Route::post('dosen', [DosenController::class, 'store'])->name('master-data.dosen.store');
         Route::get('dosen/create', [DosenController::class, 'create'])->name('master-data.dosen.create');
         Route::get('dosen/edit/{id}', [DosenController::class, 'edit'])->name('master-data.dosen.edit');
         
