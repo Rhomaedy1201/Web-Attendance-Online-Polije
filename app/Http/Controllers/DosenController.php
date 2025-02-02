@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\DosenRepository;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DosenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $param;
+
+    public function __construct(DosenRepository $dosen)
     {
-        return view("pages.dosen.index");
+        $this->param = $dosen;
+    }
+
+    public function index(Request $request)
+    {
+        $limit = $request->has('page_length') ? $request->get('page_length') : 5;
+        $search = $request->has('search') ? $request->get('search') : null;
+        $dosen = $this->param->getAllDosens($search, $limit);
+        return view("pages.dosen.index", compact("dosen"));
     }
 
     /**
@@ -27,7 +37,22 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $data = $request->validate([
+                'nip' => 'required|string|size:18',
+                'nama' => 'required|string',
+            ]);
+            
+            $this->param->store($data);
+            Alert::success("Berhasil", "Data Berhasil di simpan.");
+            return redirect()->route("master-data.dosen");
+        } catch (\Exception $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        } catch (QueryException $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -51,7 +76,22 @@ class DosenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // try {
+        //     $data = $request->validate([
+        //         'kode_jurusan' => 'required|string',
+        //         'nama' => 'required|string',
+        //     ]);
+            
+        //     $this->param->store($data);
+        //     Alert::success("Berhasil", "Data Berhasil di simpan.");
+        //     return redirect()->route("master-data.jurusan");
+        // } catch (Exception $e) {
+        //     Alert::error("Terjadi Kesalahan", $e->getMessage());
+        //     return back();
+        // } catch (QueryException $e) {
+        //     Alert::error("Terjadi Kesalahan", $e->getMessage());
+        //     return back();
+        // }
     }
 
     /**
@@ -59,6 +99,21 @@ class DosenController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // try {
+        //     $data = $request->validate([
+        //         'kode_jurusan' => 'required|string',
+        //         'nama' => 'required|string',
+        //     ]);
+            
+        //     $this->param->store($data);
+        //     Alert::success("Berhasil", "Data Berhasil di simpan.");
+        //     return redirect()->route("master-data.jurusan");
+        // } catch (Exception $e) {
+        //     Alert::error("Terjadi Kesalahan", $e->getMessage());
+        //     return back();
+        // } catch (QueryException $e) {
+        //     Alert::error("Terjadi Kesalahan", $e->getMessage());
+        //     return back();
+        // }
     }
 }

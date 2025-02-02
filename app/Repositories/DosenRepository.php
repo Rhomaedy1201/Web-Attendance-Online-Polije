@@ -2,20 +2,32 @@
 
 namespace App\Repositories;
 
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
+use App\Models\Dosen;
+
 //use Your Model
 
 /**
  * Class DosenRepository.
  */
-class DosenRepository extends BaseRepository
+class DosenRepository
 {
-    /**
-     * @return string
-     *  Return the model
-     */
-    public function model()
-    {
-        //return YourModel::class;
+    protected $model;
+
+    public function __construct(Dosen $dosen){
+        $this->model = $dosen;
+    }
+
+    public function getAllDosens($search, $limit=5){
+        $search = strtolower($search);
+        $jurusan = $this->model->where("nip","like","%".$search."%")
+        ->orWhere( "nama","like","%".$search."%")
+        ->paginate($limit);
+        return $jurusan;
+    }
+    public function store(array $data){
+        return $this->model->create([
+            "nip"=> $data["nip"],
+            "nama"=> $data["nama"],
+        ]);
     }
 }
