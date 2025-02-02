@@ -11,6 +11,10 @@
 </a>
 @endsection
 
+@section('modal')
+	<div id="modalDelete"></div>
+@endsection
+
 @section('content')
 <div class="page-inner mt--5">
 	<div class="row mt--2">
@@ -84,7 +88,8 @@
 													</span>
 													Edit
 												</a>
-												<button class="btn btn-danger" id="alert_warning">
+												<button type="button" class="btn btn-danger modal-delete-item" data-target="#alert_warning{{ $item->id }}" 
+													data-toggle="modal" data-formid="{{ $item->id }}" data-formname="{{ $item->nama }}">
 													<span class="btn-label">
 														<i class="far fa-trash-alt"></i>
 													</span>
@@ -108,42 +113,44 @@
 @endsection
 @push('extraScript')
 <script>
-	$('#alert_warning').click(function(e) {
-		swal({
-			title: 'Are you sure?',
-			text: "You won't be able to revert this!",
-			type: 'warning',
-			buttons:{
-				cancel: {
-					visible: true,
-					text : 'No, cancel!',
-					className: 'btn btn-danger'
-				},        			
-				confirm: {
-					text : 'Yes, delete it!',
-					className : 'btn btn-success'
-				}
-			}
-		}).then((willDelete) => {
-			if (willDelete) {
-				swal("Poof! Your imaginary file has been deleted!", {
-					icon: "success",
-					buttons : {
-						confirm : {
-							className: 'btn btn-success'
-						}
-					}
-				});
-			} else {
-				swal("Your imaginary file is safe!", {
-					buttons : {
-						confirm : {
-							className: 'btn btn-success'
-						}
-					}
-				});
-			}
-		});
-	})
+	$('#page_length').on('change', function() {
+            $('#form').submit();
+    });
+
+	$('.modal-delete-item').on('click', function(){
+		var formId = $(this).data('formid');
+        var formname = $(this).data('formname');
+
+		$('#modalDelete').empty();
+		$('#modalDelete').html(`
+			<div class="modal fade" id="alert_warning${formId}" tabindex="-1" role="dialog"
+			aria-labelledby="alert_warningLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title font-weight-bold" id="alert_warningLabel">
+								Warning!
+							</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							Apakah anda ingin menghapus Prodi <i><b>${formname}?</b></i>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+							<form action="{{ route('master-data.prodi.delete') }}" method="POST">
+								@csrf
+								<input type="hidden" name="formId" value="${formId}">
+								<button type="submit" class="btn btn-danger">Delete</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		`);
+	});
 </script>
 @endpush
