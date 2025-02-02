@@ -46,4 +46,9 @@ class JurusanRepository
             "nama"=> $data["nama"],
         ]);
     }
+
+    public function destroy($id)
+    {
+        return $this->model->where("id", $id)->delete();
+    }
 }

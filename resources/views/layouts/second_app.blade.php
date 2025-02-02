@@ -28,6 +28,7 @@
 	<div class="wrapper">
 		@include('partials.header')
 		@include('partials.sidebar')
+		@yield('modal')
 		<div class="main-panel">
 			<div class="content">
                 <div class="page-inner">
