@@ -138,11 +138,11 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							Apakah anda ingin menghapus Prodi <i><b>${formname}?</b></i>
+							Apakah anda ingin menghapus Matakuliah <i><b>${formname}?</b></i>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-							<form action="{{ route('master-data.prodi.delete') }}" method="POST">
+							<form action="{{ route('master-data.matkul.delete') }}" method="POST">
 								@csrf
 								<input type="hidden" name="formId" value="${formId}">
 								<button type="submit" class="btn btn-danger">Delete</button>
