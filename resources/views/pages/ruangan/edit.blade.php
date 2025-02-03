@@ -29,33 +29,42 @@
             <div class="card-header">
                 <div class="card-title">Edit</div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">
-                                Nama Gedung @include('components.text-required')
-                            </label>
-                            <select class="form-control" id="exampleFormControlSelect1" required>
-                                <option value="null">-- Pilih Gedung --</option>
-                                <option value="388" selected>Teknologi Informasi</option>
-                            </select>
+            <form action="{{ route('master-data.ruangan.update', $ruangan->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Nama Gedung @include('components.text-required')
+                                </label>
+                                <select class="form-control" name="kode_jurusan" required>
+                                    <option value="">-- Pilih Gedung --</option>
+                                    @foreach ($jurusan as $item)
+                                        <option value="{{ $item->kode_jurusan }}" 
+                                            {{ old('kode_jurusan', $ruangan->kode_jurusan) == $item->kode_jurusan ? 'selected' : '' }}>
+                                            {{ $item->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nama">Kelas</label>
+                                <input type="text" class="form-control" name="nama_kelas" placeholder="Enter Nama Kelas" value="{{ $ruangan->nama_kelas }}">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="nama">Kelas</label>
-                            <input type="email" class="form-control" id="nama" placeholder="Enter Nama Kelas" value="{{ $id }}">
-                        </div>
-                    </div>
+                    <button class="btn btn-primary ml-2 mt-2" type="submit">
+                        <span class="btn-label">
+                            <i class="far fa-save"></i>
+                        </span>
+                        Simpan
+                    </button>
                 </div>
-                <button class="btn btn-primary ml-2 mt-2" id="alert_success">
-                    <span class="btn-label">
-                        <i class="far fa-save"></i>
-                    </span>
-                    Simpan
-                </button>
-            </div>
+            </form>
         </div>
     </div>
 </div>

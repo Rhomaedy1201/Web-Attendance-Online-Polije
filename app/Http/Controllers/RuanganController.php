@@ -2,16 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
+use App\Models\Ruangan;
+use App\Repositories\RuanganRepository;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RuanganController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $param;
+
+    public function __construct(RuanganRepository $Ruangan)
     {
-        return view("pages.ruangan.index");
+        $this->param = $Ruangan;
+    }
+    public function index(Request $request)
+    {
+        $limit = $request->has('page_length') ? $request->get('page_length') : 5;
+        $search = $request->has('search') ? $request->get('search') : null;
+        $ruangan = $this->param->getAll($search, $limit);
+        return view("pages.ruangan.index", ["ruangan"=> $ruangan]);
     }
 
     /**
@@ -19,7 +30,8 @@ class RuanganController extends Controller
      */
     public function create()
     {
-        return view("pages.ruangan.create");
+        $jurusan = Jurusan::get();
+        return view("pages.ruangan.create", compact("jurusan"));
     }
 
     /**
@@ -27,7 +39,22 @@ class RuanganController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $data = $request->validate([
+                'kode_jurusan' => 'required|string',
+                'nama_kelas' => 'required|string',
+            ]);
+
+            $this->param->store($data);
+            Alert::success("Berhasil", "Data Berhasil di Simpan.");
+            return redirect()->route("master-data.ruangan");
+        } catch (\Exception $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        } catch (QueryException $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        }
     }
 
     /**
@@ -43,7 +70,9 @@ class RuanganController extends Controller
      */
     public function edit(string $id)
     {
-        return view("pages.ruangan.edit", compact("id"));
+        $jurusan = Jurusan::get();
+        $ruangan = Ruangan::findOrFail( $id );
+        return view("pages.ruangan.edit", compact(["jurusan","ruangan"]));
     }
 
     /**
@@ -51,14 +80,36 @@ class RuanganController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $data = $request->validate([
+                'kode_jurusan' => 'required|string',
+                'nama_kelas' => 'required|string',
+            ]);
+
+            $this->param->update($data, $id);
+            Alert::success("Berhasil", "Data Berhasil di Edit.");
+            return redirect()->route("master-data.ruangan");
+        } catch (\Exception $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        } catch (QueryException $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        try {
+            $this->param->destroy( $request->formId);
+            Alert::success("Berhasil", "Data Berhasil di Hapus.");
+            return redirect()->route("master-data.ruangan");
+        } catch (\Exception $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        }
     }
 }

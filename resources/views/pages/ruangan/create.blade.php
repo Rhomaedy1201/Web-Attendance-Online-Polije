@@ -29,48 +29,39 @@
             <div class="card-header">
                 <div class="card-title">Tambah</div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">
-                                Nama Gedung @include('components.text-required')
-                            </label>
-                            <select class="form-control" id="exampleFormControlSelect1" required>
-                                <option value="null">-- Pilih Gedung --</option>
-                                <option value="388">Teknologi Informasi</option>
-                            </select>
+            <form action="{{ route('master-data.ruangan.store') }}" method="POST">
+                @csrf
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">
+                                    Nama Gedung @include('components.text-required')
+                                </label>
+                                <select class="form-control" name="kode_jurusan" required>
+                                    <option value="">-- Pilih Gedung --</option>
+                                    @foreach ($jurusan as $item)
+                                        <option value="{{ $item->kode_jurusan }}" {{ old('kode_jurusan') == $item->kode_jurusan ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nama">Kelas</label>
+                                <input type="text" class="form-control" name="nama_kelas" placeholder="Enter Nama Kelas">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="nama">Kelas</label>
-                            <input type="email" class="form-control" id="nama" placeholder="Enter Nama Kelas">
-                        </div>
-                    </div>
+                    <button class="btn btn-primary ml-2 mt-2" type="submit">
+                        <span class="btn-label">
+                            <i class="far fa-save"></i>
+                        </span>
+                        Simpan
+                    </button>
                 </div>
-                <button class="btn btn-primary ml-2 mt-2" id="alert_success">
-                    <span class="btn-label">
-                        <i class="far fa-save"></i>
-                    </span>
-                    Simpan
-                </button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 @endsection
-@push('extraScript')
-    <script>
-        $('#alert_success').click(function(e) {
-            swal("Good job!", "You clicked the button!", {
-                icon : "success",
-                buttons: {        			
-                    confirm: {
-                        className : 'btn btn-success'
-                    }
-                },
-            });
-        });
-    </script>
-@endpush
