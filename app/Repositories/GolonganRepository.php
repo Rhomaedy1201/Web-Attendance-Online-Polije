@@ -34,10 +34,10 @@ class GolonganRepository
         ]);
     }
 
-    public function update(array $data){
-        return $this->model->where('golongan', $data['golongan'])->create([
-            "golongan"=> $data["golongan"],
-        ]);
+    public function update($golongan){
+        // return $this->model->where('golongan', $golongan)->create([
+        //     "golongan"=> $golongan,
+        // ]);
     }
 
     public function destroy($golongan){

@@ -29,22 +29,26 @@
             <div class="card-header">
                 <div class="card-title">Edit</div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="nama">Golongan</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Contoh. A" value="{{ $id }}">
+            <form action="{{ route('master-data.golongan.update', $golongan->golongan) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nama">Golongan</label>
+                                <input type="text" class="form-control" name="golongan" placeholder="Contoh. A" value="{{ $golongan->golongan }}">
+                            </div>
                         </div>
                     </div>
+                    <button class="btn btn-primary ml-2 mt-2" type="submit">
+                        <span class="btn-label">
+                            <i class="far fa-save"></i>
+                        </span>
+                        Simpan
+                    </button>
                 </div>
-                <button class="btn btn-primary ml-2 mt-2" id="alert_success">
-                    <span class="btn-label">
-                        <i class="far fa-save"></i>
-                    </span>
-                    Simpan
-                </button>
-            </div>
+            </form>
         </div>
     </div>
 </div>

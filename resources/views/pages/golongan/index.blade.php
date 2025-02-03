@@ -77,12 +77,12 @@
 											<td>{{ $i++ }}</td>
 											<td>{{ $item->golongan }}</td>
 											<td>
-												<a href="{{ route('master-data.golongan.edit', $item->golongan) }}" class="btn btn-warning">
+												{{-- <a href="{{ route('master-data.golongan.edit', $item->golongan) }}" class="btn btn-warning">
 													<span class="btn-label">
 														<i class="fas fa-edit"></i>
 													</span>
 													Edit
-												</a>
+												</a> --}}
 												<button type="button" class="btn btn-danger modal-delete-item" data-target="#alert_warning{{ $item->golongan }}" 
 													data-toggle="modal" data-formid="{{ $item->golongan }}" data-formname="{{ $item->golongan }}">
 													<span class="btn-label">

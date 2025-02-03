@@ -65,10 +65,10 @@ class GolonganController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($golongan)
     {
-        $golongan = Golongan::findOrFail($id);
-        return view("pages.golongan.edit", compact("golongan"));
+        // $golongan = Golongan::where('golongan',$golongan)->first();
+        // return view("pages.golongan.edit", compact("golongan"));
     }
 
     /**
@@ -76,21 +76,7 @@ class GolonganController extends Controller
      */
     public function update(Request $request)
     {
-        try {
-            $data = $request->validate([
-                'golongan' => 'required|string',
-            ]);
-
-            $this->param->update($data);
-            Alert::success("Berhasil", "Data Berhasil di Edit.");
-            return redirect()->route("master-data.golongan");
-        } catch (\Exception $e) {
-            Alert::error("Terjadi Kesalahan", $e->getMessage());
-            return back();
-        } catch (QueryException $e) {
-            Alert::error("Terjadi Kesalahan", $e->getMessage());
-            return back();
-        }
+        //
     }
 
     /**
@@ -99,7 +85,7 @@ class GolonganController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $this->param->destroy($request->golongan);
+            $this->param->destroy($request->formId);
             Alert::success("Berhasil", "Data Berhasil di Hapus.");
             return redirect()->route("master-data.golongan");
         } catch (\Exception $e) {

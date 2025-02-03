@@ -70,8 +70,8 @@ Route::middleware(['auth','web'])->group(function () {
         Route::get('golongan', [GolonganController::class, 'index'])->name('master-data.golongan');
         Route::post('golongan', [GolonganController::class, 'store'])->name('master-data.golongan.store');
         Route::get('golongan/create', [GolonganController::class, 'create'])->name('master-data.golongan.create');
-        Route::get('golongan/edit/{id}', [GolonganController::class, 'edit'])->name('master-data.golongan.edit');
-        Route::put('golongan/update/{id}', [GolonganController::class, 'update'])->name('master-data.golongan.update');
+        Route::get('golongan/edit/{golongan}', [GolonganController::class, 'edit'])->name('master-data.golongan.edit');
+        Route::put('golongan/update/{golongan}', [GolonganController::class, 'update'])->name('master-data.golongan.update');
         Route::post('golongan/delete', [GolonganController::class, 'destroy'])->name('master-data.golongan.delete');
     
         // Jadwal
