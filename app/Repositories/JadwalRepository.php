@@ -2,20 +2,22 @@
 
 namespace App\Repositories;
 
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
+use App\Models\Jadwal;
+
 //use Your Model
 
 /**
  * Class JadwalRepository.
  */
-class JadwalRepository extends BaseRepository
+class JadwalRepository
 {
-    /**
-     * @return string
-     *  Return the model
-     */
-    public function model()
-    {
-        //return YourModel::class;
+    protected $model;
+
+    public function __construct(Jadwal $jadwal){
+        $this->model = $jadwal;
+    }
+
+    public function store(array $data){
+        return $this->model->create($data);
     }
 }

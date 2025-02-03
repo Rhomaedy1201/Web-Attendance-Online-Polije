@@ -58,7 +58,7 @@
                                     SKS @include('components.text-required')
                                 </label>
                                 <select class="form-control" name="sks" required>
-                                    <option value="null">-- Pilih SKS --</option>
+                                    <option value="">-- Pilih SKS --</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>

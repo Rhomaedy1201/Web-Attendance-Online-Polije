@@ -76,6 +76,7 @@ Route::middleware(['auth','web'])->group(function () {
     
         // Jadwal
         Route::get('jadwal', [JadwalController::class, 'index'])->name('master-data.jadwal');
+        Route::post('jadwal', [JadwalController::class, 'store'])->name('master-data.jadwal.store');
         Route::get('jadwal/create', [JadwalController::class, 'create'])->name('master-data.jadwal.create');
         Route::get('jadwal/edit/{id}', [JadwalController::class, 'edit'])->name('master-data.jadwal.edit');
     
