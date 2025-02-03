@@ -11,6 +11,10 @@
 </a>
 @endsection
 
+@section('modal')
+	<div id="modalDelete"></div>
+@endsection
+
 @section('content')
 <div class="page-inner mt--5">
 	<div class="row mt--2">
@@ -19,39 +23,88 @@
 				<div class="card-header">
 					<h4 class="card-title">Data Golongan</h4>
 				</div>
-				<div class="card-body">
-					<div class="table-responsive">
-						<table id="basic-datatables" class="display table table-striped table-hover">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>Golongan</th>
-									<th>Aksi</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>A</td>
-									<td>
-										<a href="{{ route('master-data.golongan.edit', '10') }}" class="btn btn-warning">
-											<span class="btn-label">
-												<i class="fas fa-edit"></i>
-											</span>
-											Edit
-										</a>
-										<button class="btn btn-danger" id="alert_warning">
-											<span class="btn-label">
-												<i class="far fa-trash-alt"></i>
-											</span>
-											Hapus
-										</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+				<form id="form" method="get">
+					<div class="card-body">
+						<div class="table-responsive">
+							<div class="row">
+								<div class="col-md-10">
+									<div class="d-flex align-items-center gap-8">
+										<label for="page_length" class="mb-0">Show</label>
+										<select name="page_length" class="form-select form-select-sm w-auto"
+											id="page_length">
+											<option value="5" @isset($_GET['page_length']) {{ $_GET['page_length']==5
+												? 'selected' : '' }} @endisset>
+												5</option>
+											<option value="10" @isset($_GET['page_length']) {{ $_GET['page_length']==10
+												? 'selected' : '' }} @endisset>
+												10</option>
+											<option value="20" @isset($_GET['page_length']) {{ $_GET['page_length']==20
+												? 'selected' : '' }} @endisset>
+												20</option>
+											<option value="50" @isset($_GET['page_length']) {{ $_GET['page_length']==50
+												? 'selected' : '' }} @endisset>
+												50</option>
+										</select>
+										<label for="page_length" class="mb-0">entries</label>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="input-icon">
+										<input type="text" class="form-control" placeholder="Search..." name="search"
+											value="{{ isset($_GET['search']) ? $_GET['search'] : '' }}">
+										<span class="input-icon-addon">
+											<i class="fa fa-search"></i>
+										</span>
+									</div>
+								</div>
+							</div>
+							<table id="basic-datatables" class="display table table-striped table-hover">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Golongan</th>
+										<th>Aksi</th>
+									</tr>
+								</thead>
+								<tbody>
+									@php
+									$page = isset($_GET['page']) ? $_GET['page'] : 1;
+									$page_length = isset($_GET['page_length']) ? $_GET['page_length'] : 5;
+									$i = $page == 1 ? 1 : $page * $page_length - $page_length + 1;
+									@endphp
+									@forelse ($golongan as $item)
+										<tr>
+											<td>{{ $i++ }}</td>
+											<td>{{ $item->golongan }}</td>
+											<td>
+												<a href="{{ route('master-data.golongan.edit', $item->golongan) }}" class="btn btn-warning">
+													<span class="btn-label">
+														<i class="fas fa-edit"></i>
+													</span>
+													Edit
+												</a>
+												<button type="button" class="btn btn-danger modal-delete-item" data-target="#alert_warning{{ $item->golongan }}" 
+													data-toggle="modal" data-formid="{{ $item->golongan }}" data-formname="{{ $item->golongan }}">
+													<span class="btn-label">
+														<i class="far fa-trash-alt"></i>
+													</span>
+													Hapus
+												</button>
+											</td>
+										</tr>
+									@empty
+										<tr>
+											<td colspan="4" class="text-center"><b>Data Golongan Kosong.</b></td>
+										</tr>
+									@endforelse
+								</tbody>
+							</table>
+							<nav aria-label="Page navigation example">
+								{{ $golongan->links('pagination::bootstrap-5') }}
+							</nav>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -59,42 +112,44 @@
 @endsection
 @push('extraScript')
 <script>
-	$('#alert_warning').click(function(e) {
-		swal({
-			title: 'Are you sure?',
-			text: "You won't be able to revert this!",
-			type: 'warning',
-			buttons:{
-				cancel: {
-					visible: true,
-					text : 'No, cancel!',
-					className: 'btn btn-danger'
-				},        			
-				confirm: {
-					text : 'Yes, delete it!',
-					className : 'btn btn-success'
-				}
-			}
-		}).then((willDelete) => {
-			if (willDelete) {
-				swal("Poof! Your imaginary file has been deleted!", {
-					icon: "success",
-					buttons : {
-						confirm : {
-							className: 'btn btn-success'
-						}
-					}
-				});
-			} else {
-				swal("Your imaginary file is safe!", {
-					buttons : {
-						confirm : {
-							className: 'btn btn-success'
-						}
-					}
-				});
-			}
-		});
-	})
+	$('#page_length').on('change', function() {
+            $('#form').submit();
+    });
+
+	$('.modal-delete-item').on('click', function(){
+		var formId = $(this).data('formid');
+        var formname = $(this).data('formname');
+
+		$('#modalDelete').empty();
+		$('#modalDelete').html(`
+			<div class="modal fade" id="alert_warning${formId}" tabindex="-1" role="dialog"
+			aria-labelledby="alert_warningLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title font-weight-bold" id="alert_warningLabel">
+								Warning!
+							</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							Apakah anda ingin menghapus golongan <i><b>${formname}?</b></i>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+							<form action="{{ route('master-data.golongan.delete') }}" method="POST">
+								@csrf
+								<input type="hidden" name="formId" value="${formId}">
+								<button type="submit" class="btn btn-danger">Delete</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		`);
+	});
 </script>
 @endpush

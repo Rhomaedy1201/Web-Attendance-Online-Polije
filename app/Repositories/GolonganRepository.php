@@ -2,20 +2,45 @@
 
 namespace App\Repositories;
 
-use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
+use App\Models\Golongan;
+
 //use Your Model
 
 /**
  * Class GolonganRepository.
  */
-class GolonganRepository extends BaseRepository
+class GolonganRepository
 {
-    /**
-     * @return string
-     *  Return the model
-     */
-    public function model()
+    protected $model;
+
+    public function __construct(Golongan $model)
     {
-        //return YourModel::class;
+        $this->model = $model;
+    }
+
+    public function getAllGolongan($search, $limit=5){
+        $search = strtolower($search);
+        $golongan = $this->model
+        ->where(function($query) use ($search) {
+            $query->where("golongan", "like", "%".$search."%");
+        })
+        ->paginate($limit);
+        return $golongan;
+    }
+
+    public function store(array $data){
+        return $this->model->create([
+            "golongan"=> $data["golongan"],
+        ]);
+    }
+
+    public function update(array $data){
+        return $this->model->where('golongan', $data['golongan'])->create([
+            "golongan"=> $data["golongan"],
+        ]);
+    }
+
+    public function destroy($golongan){
+        return $this->model->where("golongan", $golongan)->delete();
     }
 }

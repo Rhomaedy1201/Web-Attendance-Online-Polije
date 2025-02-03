@@ -19,7 +19,7 @@ class RuanganRepository
 
     public function getAll($search, $limit=5){
         $search = strtolower($search);
-        $dosen = $this->model
+        $ruangan = $this->model
         ->where(function($query) use ($search) {
             $query->where("nama_kelas", "like", "%".$search."%");
         })
@@ -27,7 +27,7 @@ class RuanganRepository
             $query->where("nama", "like", "%".$search."%");
         })
         ->paginate($limit);
-        return $dosen;
+        return $ruangan;
     }
 
     public function store(array $data){
