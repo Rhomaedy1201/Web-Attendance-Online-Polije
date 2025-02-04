@@ -280,7 +280,7 @@ $(document).ready(function () {
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Durasi</label>
-                                        <input type="text" class="form-control durasi" name="durasi[]" placeholder="Durasi" disabled>
+                                        <input type="text" class="form-control durasi" name="durasi[]" placeholder="Durasi" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-4">

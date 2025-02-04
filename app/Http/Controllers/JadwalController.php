@@ -55,11 +55,11 @@ class JadwalController extends Controller
                 'semester' => 'required|integer',
                 'golongan' => 'required|string',
                 'jam_masuk' => 'required|array',
-                'jam_masuk.*' => 'required|date_format:H:i',
+                'jam_masuk.*' => 'required|string',
                 'jam_toleransi_masuk' => 'required|array',
                 'jam_toleransi_masuk.*' => 'required|integer',
                 'jam_selesai' => 'required|array',
-                'jam_selesai.*' => 'required|date_format:H:i',
+                'jam_selesai.*' => 'required|string',
                 'durasi' => 'required|array',
                 'durasi.*' => 'required|string',
                 'id_mk' => 'required|array',
@@ -67,28 +67,31 @@ class JadwalController extends Controller
                 'id_ruang' => 'required|array',
                 'id_ruang.*' => 'required|integer',
             ]);
-            
-            $jadwalData = [];
-            foreach ($request->jam_masuk as $index => $jamMasuk) {
-                $jadwalData[] = [
-                    'kode_prodi' => $request->kode_prodi,
-                    'hari' => $request->hari,
-                    'semester' => $request->semester,
-                    'golongan' => $request->golongan,
-                    'jam_masuk' => $jamMasuk[$index],
-                    'jam_toleransi_masuk' => $request->jam_toleransi_masuk[$index],
-                    'jam_selesai' => $request->jam_selesai[$index],
-                    'durasi' => $request->durasi[$index],
-                    'id_mk' => $request->id_mk[$index],
-                    'id_ruang' => $request->id_ruang[$index],
+
+            $kodeProdi = $request->kode_prodi;
+            $hari = $request->hari;
+            $semester = $request->semester;
+            $golongan = $request->golongan;
+
+            for ($i=0; $i < count($request->jam_masuk); $i++) { 
+                $data = [
+                    'kode_prodi' => $kodeProdi,
+                    'hari' => $hari,
+                    'semester' => $semester,
+                    'golongan' => $golongan,
+                    'jam_masuk' => $request->jam_masuk[$i],
+                    'jam_toleransi_masuk' => $request->jam_toleransi_masuk[$i],
+                    'jam_selesai' => $request->jam_selesai[$i],
+                    'durasi' => $request->durasi[$i],
+                    'id_mk' => $request->id_mk[$i],
+                    'id_ruang' => $request->id_ruang[$i],
                     'created_at' => now(),
-                    'updated_at'=> now(),
+                    'updated_at' => now()
                 ];
+
+                $this->param->store($data);
             }
 
-            dd($jadwalData);
-
-            $this->param->store($jadwalData);
             Alert::success("Berhasil", "Data Berhasil di Simpan.");
             return redirect()->route("master-data.jadwal");
         } catch (\Exception $e) {
