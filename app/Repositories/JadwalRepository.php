@@ -26,7 +26,6 @@ class JadwalRepository
         })
         ->with('matkul.dosen')
         ->with('ruangan.jurusan')
-        // ->with('jurusan')
         ->get();
         return $jadwal;
     }
