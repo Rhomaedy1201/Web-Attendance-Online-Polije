@@ -21,9 +21,20 @@ class JadwalController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
-        return view("pages.jadwal.index");
+        $prodi = Prodi::get();
+        $golongan = Golongan::get();
+        $jadwal = $this->param->getJadwal(
+            $request->kode_prodi,
+            $request->semester,
+            $request->golongan,
+        );
+        return view("pages.jadwal.index", [
+            "prodi"=> $prodi,
+            "golongan"=> $golongan,
+            "jadwal"=> $jadwal
+        ]);
     }
 
     /**
