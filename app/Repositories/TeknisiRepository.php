@@ -38,4 +38,12 @@ class TeknisiRepository
             "updated_at"=> now(),
         ]);
     }
+
+    public function update(array $data, $id){
+        return $this->model->where('id', $id)->update([
+            "nip"=> $data["nip"],
+            "nama"=> $data["nama"],
+            "updated_at"=> now(),
+        ]);
+    }
 }

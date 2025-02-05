@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Teknisi;
 use App\Repositories\TeknisiRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class TeknisiController extends Controller
 
             $this->param->store($data);
             Alert::success("Berhasil", "Data Berhasil di Simpan.");
-            return redirect()->route("master-data.ruangan");
+            return redirect()->route("master-data.teknisi");
         } catch (\Exception $e) {
             Alert::error("Terjadi Kesalahan", $e->getMessage());
             return back();
@@ -67,7 +68,8 @@ class TeknisiController extends Controller
      */
     public function edit(string $id)
     {
-        return view("pages.teknisi.edit", compact("id"));
+        $teknisi = Teknisi::findOrFail($id);
+        return view("pages.teknisi.edit", compact("teknisi"));
     }
 
     /**
@@ -75,7 +77,22 @@ class TeknisiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $data = $request->validate([
+                'nip' => 'required|string|size:18',
+                'nama' => 'required|string',
+            ]);
+
+            $this->param->update($data, $id);
+            Alert::success("Berhasil", "Data Berhasil di Edit.");
+            return redirect()->route("master-data.teknisi");
+        } catch (\Exception $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        } catch (QueryException $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        }
     }
 
     /**
