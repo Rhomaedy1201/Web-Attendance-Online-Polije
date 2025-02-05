@@ -46,4 +46,15 @@ class TeknisiRepository
             "updated_at"=> now(),
         ]);
     }
+
+    public function destroy($id){
+        return $this->model->where("id", $id)->delete();
+    }
+
+    public function reset(string $nip, $id){
+        return $this->model->where('id', $id)->update([
+            "password"=> Hash::make($nip),
+            "updated_at"=> now(),
+        ]);
+    }
 }

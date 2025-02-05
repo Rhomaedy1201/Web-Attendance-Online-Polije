@@ -87,6 +87,7 @@ Route::middleware(['auth','web'])->group(function () {
         Route::get('teknisi/edit/{id}', [TeknisiController::class, 'edit'])->name('master-data.teknisi.edit');
         Route::put('teknisi/update/{id}', [TeknisiController::class, 'update'])->name('master-data.teknisi.update');
         Route::post('teknisi/delete', [TeknisiController::class, 'destroy'])->name('master-data.teknisi.delete');
+        Route::post('teknisi/reset', [TeknisiController::class, 'resetPassword'])->name('master-data.teknisi.reset');
     
         // Mahasiswa
         Route::get('mahasiswa', [MahasiswaController::class, 'index'])->name('master-data.mahasiswa');

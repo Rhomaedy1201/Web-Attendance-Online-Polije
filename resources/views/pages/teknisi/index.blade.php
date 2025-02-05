@@ -13,6 +13,7 @@
 
 @section('modal')
 	<div id="modalDelete"></div>
+	<div id="modalReset"></div>
 @endsection
 
 @section('content')
@@ -85,6 +86,13 @@
 													</span>
 													Edit
 												</a>
+												<button type="button" class="btn btn-primary modal-reset-item" data-target="#alert_warning{{ $item->id }}" 
+													data-toggle="modal" data-formid="{{ $item->id }}" data-formname="{{ $item->nama }}" data-formnip="{{ $item->nip }}">
+													<span class="btn-label">
+														<i class="far icon-refresh"></i>
+													</span>
+													Reset Passowrd
+												</button>
 												<button type="button" class="btn btn-danger modal-delete-item" data-target="#alert_warning{{ $item->id }}" 
 													data-toggle="modal" data-formid="{{ $item->id }}" data-formname="{{ $item->nama }}">
 													<span class="btn-label">
@@ -138,14 +146,52 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							Apakah anda ingin menghapus golongan <i><b>${formname}?</b></i>
+							Apakah anda ingin menghapus Teknisi <i><b>${formname}?</b></i>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-							<form action="{{ route('master-data.golongan.delete') }}" method="POST">
+							<form action="{{ route('master-data.teknisi.delete') }}" method="POST">
 								@csrf
 								<input type="hidden" name="formId" value="${formId}">
 								<button type="submit" class="btn btn-danger">Delete</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		`);
+	});
+
+	$('.modal-reset-item').on('click', function(){
+		var formId = $(this).data('formid');
+        var formname = $(this).data('formname');
+        var formnip = $(this).data('formnip');
+
+		$('#modalReset').empty();
+		$('#modalReset').html(`
+			<div class="modal fade" id="alert_warning${formId}" tabindex="-1" role="dialog"
+			aria-labelledby="alert_warningLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title font-weight-bold" id="alert_warningLabel">
+								Warning!
+							</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							Apakah anda ingin menghapus teknisi <i><b>${formname}?</b></i>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+							<form action="{{ route('master-data.teknisi.reset') }}" method="POST">
+								@csrf
+								<input type="hidden" name="formId" value="${formId}">
+								<input type="hidden" name="formNip" value="${formnip}">
+								<button type="submit" class="btn btn-primary">Reset</button>
 							</form>
 						</div>
 					</div>
