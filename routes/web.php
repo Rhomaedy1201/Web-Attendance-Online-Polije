@@ -82,8 +82,11 @@ Route::middleware(['auth','web'])->group(function () {
     
         // Teknisi
         Route::get('teknisi', [TeknisiController::class, 'index'])->name('master-data.teknisi');
+        Route::post('teknisi', [TeknisiController::class, 'store'])->name('master-data.teknisi.store');
         Route::get('teknisi/create', [TeknisiController::class, 'create'])->name('master-data.teknisi.create');
         Route::get('teknisi/edit/{id}', [TeknisiController::class, 'edit'])->name('master-data.teknisi.edit');
+        Route::put('teknisi/update/{id}', [TeknisiController::class, 'update'])->name('master-data.teknisi.update');
+        Route::post('teknisi/delete', [TeknisiController::class, 'destroy'])->name('master-data.teknisi.delete');
     
         // Mahasiswa
         Route::get('mahasiswa', [MahasiswaController::class, 'index'])->name('master-data.mahasiswa');

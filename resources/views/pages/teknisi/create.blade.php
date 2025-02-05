@@ -29,49 +29,38 @@
             <div class="card-header">
                 <div class="card-title">Tambah</div>
             </div>
-            <div class="card-body">
-                <div class="col-md-12">
-                    <div class="alert alert-info" role="alert">
-                        Password otomatis dibuat berdasarkan NIP yang di daftarkan!.
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="kode">NIP</label>
-                            <input type="text" class="form-control" id="nip" placeholder="NIP Teknisi">
+            <form action="{{ route('master-data.teknisi.store') }}" method="POST">
+                @csrf
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="alert alert-info" role="alert">
+                            Password otomatis dibuat berdasarkan NIP yang di daftarkan!.
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Nama Teknisi">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="kode">NIP</label>
+                                <input type="text" class="form-control" name="nip" placeholder="NIP Teknisi">
+                            </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nama">Nama</label>
+                                <input type="text" class="form-control" name="nama" placeholder="Nama Teknisi">
+                            </div>
+                        </div>
+                        
                     </div>
-                    
+                    <button class="btn btn-primary ml-2 mt-2" type="submit">
+                        <span class="btn-label">
+                            <i class="far fa-save"></i>
+                        </span>
+                        Simpan
+                    </button>
                 </div>
-                <button class="btn btn-primary ml-2 mt-2" id="alert_success">
-                    <span class="btn-label">
-                        <i class="far fa-save"></i>
-                    </span>
-                    Simpan
-                </button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
 @endsection
-@push('extraScript')
-    <script>
-        $('#alert_success').click(function(e) {
-            swal("Good job!", "You clicked the button!", {
-                icon : "success",
-                buttons: {        			
-                    confirm: {
-                        className : 'btn btn-success'
-                    }
-                },
-            });
-        });
-    </script>
-@endpush
