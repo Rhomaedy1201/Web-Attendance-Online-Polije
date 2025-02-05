@@ -15,9 +15,12 @@ class TeknisiController extends Controller
         $this->param = $teknisi;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view("pages.teknisi.index");
+        $limit = $request->has('page_length') ? $request->get('page_length') : 5;
+        $search = $request->has('search') ? $request->get('search') : null;
+        $teknisi = $this->param->getAll($search, $limit);
+        return view("pages.teknisi.index", compact("teknisi"));
     }
 
     /**

@@ -12,14 +12,25 @@ use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
  */
 class TeknisiRepository
 {
-    protected $modal;
+    protected $model;
 
     public function __construct(Teknisi $teknisi){
-        $this->modal = $teknisi;
+        $this->model = $teknisi;
+    }
+
+    public function getAll($search, $limit=5){
+        $search = strtolower($search);
+        $teknisi = $this->model
+        ->where(function($query) use ($search) {
+            $query->where("nip", "like", "%".$search."%")
+            ->orWhere("nama", "like", "%".$search."%");
+        })
+        ->paginate($limit);
+        return $teknisi;
     }
 
     public function store(array $data){
-        return $this->modal->insert([
+        return $this->model->insert([
             "nip"=> $data["nip"],
             "nama"=> $data["nama"],
             "password"=> Hash::make($data["nip"]),
