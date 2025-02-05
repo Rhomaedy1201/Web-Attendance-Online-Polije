@@ -18,9 +18,12 @@ class MahasiswaController extends Controller
         $this->param = $Mahasiswa;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view("pages.mahasiswa.index");
+        $limit = $request->has('page_length') ? $request->get('page_length') : 5;
+        $search = $request->has('search') ? $request->get('search') : null;
+        $mahasiswa = $this->param->getAll($search, $limit);
+        return view("pages.mahasiswa.index", compact("mahasiswa"));
     }
 
     /**
@@ -58,7 +61,7 @@ class MahasiswaController extends Controller
             $this->param->store($data);
             $this->param->storeDetail($dataDetail);
             Alert::success("Berhasil", "Data Berhasil di Simpan.");
-            return redirect()->route("master-data.prodi");
+            return redirect()->route("master-data.mahasiswa");
         } catch (\Exception $e) {
             Alert::error("Terjadi Kesalahan", $e->getMessage());
             return back();

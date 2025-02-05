@@ -18,6 +18,20 @@ class MahasiswaRepository
         $this->modelDetail = $mahasiswaDetail;
     }
 
+    public function getAll($search, $limit=5){
+        $search = strtolower($search);
+        $mahasiswa = $this->modelDetail
+        ->where(function($query) use ($search) {
+            $query->where("nim", "like", "%".$search."%");
+        })
+        ->orWhereHas('mahasiswa', function($query) use ($search) {
+            $query->where("nama", "like", "%".$search."%");
+        })
+        ->with("prodi")
+        ->paginate($limit);
+        return $mahasiswa;
+    }
+
     public function store(array $data){
         return $this->model->create([
             "nim"=> $data["nim"],
