@@ -126,13 +126,24 @@
 										</td>
 									</tr>
 								@empty
-								@php
-									$prodi = App\Models\Prodi::where('kode_prodi', request()->kode_prodi)->first();
-									$golongan = App\Models\Golongan::where('golongan', request()->golongan)->first();
-								@endphp
-									<tr>
-										<td colspan="9" class="text-center"><b>Data Jadwal Berdasarkan dengan Prodi: {{ $prodi->nama }}, Semester: {{ request()->semester }} dan Golongan: {{ $golongan->golongan }} Kosong.</b></td>
-									</tr>
+									@php
+										if (request()->kode_prodi && request()->golongan) {
+											$prodi = request()->kode_prodi ?? App\Models\Prodi::where('kode_prodi', request()->kode_prodi)->first();
+											$golongan = request()->golongan ?? App\Models\Golongan::where('golongan', request()->golongan)->first();
+										} else {
+											$prodi = "";
+											$golongan = "";
+										}
+									@endphp
+									@if (request()->kode_prodi && request()->golongan)
+										<tr>
+											<td colspan="9" class="text-center"><b>Data Jadwal Berdasarkan dengan Prodi: {{ $prodi->nama }}, Semester: {{ request()->semester }} dan Golongan: {{ $golongan->golongan }} Kosong.</b></td>
+										</tr>
+									@else
+										<tr>
+											<td colspan="9" class="text-center"><b>Untuk melihat data jadwal silahkan filter data.</b></td>
+										</tr>
+									@endif
 								@endforelse
 							</tbody>
 						</table>
