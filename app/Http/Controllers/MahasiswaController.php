@@ -2,13 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Golongan;
+use App\Models\Prodi;
+use App\Repositories\MahasiswaRepository;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MahasiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $param;
+
+    public function __construct(MahasiswaRepository $Mahasiswa)
+    {
+        $this->param = $Mahasiswa;
+    }
+
     public function index()
     {
         return view("pages.mahasiswa.index");
@@ -19,7 +28,9 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view("pages.mahasiswa.create");
+        $prodi = Prodi::get();
+        $golongan = Golongan::get();
+        return view("pages.mahasiswa.create", compact("prodi","golongan"));
     }
 
     /**
@@ -27,7 +38,34 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $data = $request->validate([
+                'nim' => 'required|string|size:9',
+                'nama' => 'required|string',
+            ]);
+
+            $dataDetail = $request->validate([
+                'nim' => 'required|string|size:9',
+                'kode_prodi' => 'required|string',
+                'jk' => 'required|string',
+                'alamat' => 'required|string',
+                'telp' => 'required|string',
+                'golongan' => 'required|string',
+                'angkatan' => 'required|string',
+                'semester_sekarang' => 'required|string',
+            ]);
+
+            $this->param->store($data);
+            $this->param->storeDetail($dataDetail);
+            Alert::success("Berhasil", "Data Berhasil di Simpan.");
+            return redirect()->route("master-data.prodi");
+        } catch (\Exception $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        } catch (QueryException $e) {
+            Alert::error("Terjadi Kesalahan", $e->getMessage());
+            return back();
+        }
     }
 
     /**
