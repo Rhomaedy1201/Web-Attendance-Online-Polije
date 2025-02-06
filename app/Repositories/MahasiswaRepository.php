@@ -52,4 +52,12 @@ class MahasiswaRepository
             "semester_sekarang"=> $data["semester_sekarang"],
         ]);
     }
+
+    public function destroy($nim){
+        return $this->model->where("nim", $nim)->delete();
+    }
+
+    public function destroyDetail($nim){
+        return $this->modelDetail->where("nim", $nim)->delete();
+    }
 }

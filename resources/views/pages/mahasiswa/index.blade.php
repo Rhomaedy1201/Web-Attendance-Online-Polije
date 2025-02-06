@@ -11,6 +11,10 @@
 </a>
 @endsection
 
+@section('modal')
+<div id="modalDelete"></div>
+@endsection
+
 @section('content')
 <div class="page-inner mt--5">
 	<div class="row mt--2">
@@ -158,11 +162,11 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							Apakah anda ingin menghapus jurusan <i><b>${formname}?</b></i>
+							Apakah anda ingin menghapus Mahasiswa <i><b>${formname}?</b></i>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-							<form action="{{ route('master-data.jurusan.delete') }}" method="POST">
+							<form action="{{ route('master-data.mahasiswa.delete') }}" method="POST">
 								@csrf
 								<input type="hidden" name="formId" value="${formId}">
 								<button type="submit" class="btn btn-danger">Delete</button>

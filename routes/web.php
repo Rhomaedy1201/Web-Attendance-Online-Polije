@@ -94,6 +94,8 @@ Route::middleware(['auth','web'])->group(function () {
         Route::post('mahasiswa', [MahasiswaController::class, 'store'])->name('master-data.mahasiswa.store');
         Route::get('mahasiswa/create', [MahasiswaController::class, 'create'])->name('master-data.mahasiswa.create');
         Route::get('mahasiswa/edit/{id}', [MahasiswaController::class, 'edit'])->name('master-data.mahasiswa.edit');
+        Route::put('mahasiswa/edit/{id}', [MahasiswaController::class, 'update'])->name('master-data.mahasiswa.update');
+        Route::post('mahasiswa/delete', [MahasiswaController::class, 'destroy'])->name('master-data.mahasiswa.delete');
     
     });
     
