@@ -10,11 +10,5 @@ Route::middleware(['guest'])->group(function () {
 
 // Middleware auth:api digunakan untuk rute yang memerlukan autentikasi token
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/dashboard', function () {
-        return response()->json([
-            'message' => 'Selamat datang di dashboard API mahasiswa!'
-        ]);
-    });
-
-    // Route::post('/logout', [AuthController::class, 'logout'])->name('api.logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('api.logout');
 });
