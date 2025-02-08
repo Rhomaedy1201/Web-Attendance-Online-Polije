@@ -134,8 +134,9 @@
 											$prodi = "";
 											$golongan = "";
 										}
+										
 									@endphp
-									@if (request()->kode_prodi && request()->golongan)
+									@if (request()->kode_prodi && request()->golongan && count($jadwal) != 0)
 										<tr>
 											<td colspan="9" class="text-center"><b>Data Jadwal Berdasarkan dengan Prodi: {{ $prodi->nama }}, Semester: {{ request()->semester }} dan Golongan: {{ $golongan->golongan }} Kosong.</b></td>
 										</tr>
