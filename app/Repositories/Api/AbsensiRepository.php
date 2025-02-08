@@ -23,10 +23,14 @@ class AbsensiRepository
         $this->model = $absen;
     }
 
-    public function absenMasuk(array $params)
+    public function absenMasuk(array $params, $nim)
     {
         $now = $params['dateNow'];
         $user = $params['user'];
+
+        if ($nim != $user->nim) {
+            return $this->okApiResponse("Wajah Tidak Sesuai");
+        }
 
         // Ambil detail mahasiswa
         $detailMhs = MahasiswaDetail::where("nim", $user->nim)->first();

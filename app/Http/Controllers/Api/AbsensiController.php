@@ -29,8 +29,8 @@ class AbsensiController extends Controller
                 "dateNow" => $date,
                 "user" => $request->user(),
             ];
-    
-            $absenMasuk = $this->param->absenMasuk($params);
+
+            $absenMasuk = $this->param->absenMasuk($params, $request->nim);
             return $absenMasuk; 
         } catch (\Throwable $th) {
             return $this->errorApiResponse($th->getMessage(), 500);
