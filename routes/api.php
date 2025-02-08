@@ -14,4 +14,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('api.logout');
 
     Route::get('jadwal', [JadwalApiController::class, 'index'])->name('jadwal');
+    Route::get('jadwal-all-day', [JadwalApiController::class, 'getAllDay'])->name('jadwal.day');
 });

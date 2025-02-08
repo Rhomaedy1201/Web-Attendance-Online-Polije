@@ -3,6 +3,8 @@
 namespace App\Repositories\Api;
 
 use App\Models\Jadwal;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 /**
  * Class JadwalApiRepository.
@@ -30,4 +32,24 @@ class JadwalApiRepository
 
         return $jadwal;
     }
+
+    public function getAllDay($gol, $smst, $kdProdi)
+    {
+        Carbon::setLocale('id');
+        $hariIni = Str::lower(Carbon::now()->translatedFormat('l'));
+        $jadwal = $this->model
+        ->where(function($query) use ($gol, $smst, $kdProdi, $hariIni) {
+            $query->where("kode_prodi", $kdProdi)
+            ->where('semester', $smst)
+            ->where('golongan', $gol)
+            ->where('hari', $hariIni);
+        })
+        ->with('matkul.dosen')
+        ->with('ruangan.jurusan')
+        ->get();
+
+        return $jadwal;
+    }
+
+
 }

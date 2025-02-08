@@ -26,6 +26,13 @@ class JadwalApiController extends Controller
         return $this->okApiResponse($jadwal, 'Berhasil Get Jadwal');
     }
 
+    public function getAllDay(Request $request){
+        $user = $request->user();
+        $detail = MahasiswaDetail::where("nim", $user->nim)->first();
+        $jadwal = $this->param->getAllDay($detail->golongan, $detail->semester_sekarang, $detail->kode_prodi);
+        return $this->okApiResponse($jadwal, 'Berhasil Get Jadwal');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
