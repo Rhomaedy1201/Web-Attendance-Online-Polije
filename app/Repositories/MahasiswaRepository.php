@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Mahasiswa;
 use App\Models\MahasiswaDetail;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class MahasiswaRepository.
@@ -36,7 +37,7 @@ class MahasiswaRepository
         return $this->model->create([
             "nim"=> $data["nim"],
             "nama"=> $data["nama"],
-            "password"=> $data["nim"],
+            "password"=> Hash::make($data["nim"]),
         ]);
     }
 
