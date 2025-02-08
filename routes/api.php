@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AbsensiController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\JadwalApiController;
 use Illuminate\Http\Request;
@@ -13,6 +14,10 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('api.logout');
 
+    // Jadwal
     Route::get('jadwal', [JadwalApiController::class, 'index'])->name('jadwal');
     Route::get('jadwal-all-day', [JadwalApiController::class, 'getAllDay'])->name('jadwal.day');
+
+    // Absen
+    Route::post('/absen-masuk', [AbsensiController::class, 'masuk'])->name('absen.masuk');
 });
