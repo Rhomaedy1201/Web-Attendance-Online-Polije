@@ -51,5 +51,23 @@ class JadwalApiRepository
         return $jadwal;
     }
 
+    public function getNow($gol, $smst, $kdProdi){
+        Carbon::setLocale('id');
+        $hariIni = Str::lower(Carbon::now()->translatedFormat('l'));
+        $waktuSekarang = Carbon::now()->format('H:i');
+        $jadwal = $this->model
+        ->where(function($query) use ($gol, $smst, $kdProdi, $hariIni, $waktuSekarang) {
+            $query->where("kode_prodi", $kdProdi)
+            ->where('semester', $smst)
+            ->where('golongan', $gol)
+            ->where('hari', $hariIni)
+            ->whereTime('jam_masuk', '<=', $waktuSekarang)
+            ->whereTime('jam_selesai', '>=', $waktuSekarang);
+        })
+        ->with('matkul.dosen')
+        ->with('ruangan.jurusan')
+        ->get();
 
+        return $jadwal;
+    }
 }

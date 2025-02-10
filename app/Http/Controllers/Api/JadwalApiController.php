@@ -33,6 +33,13 @@ class JadwalApiController extends Controller
         return $this->okApiResponse($jadwal, 'Berhasil Get Jadwal');
     }
 
+    public function getNow(Request $request){
+        $user = $request->user();
+        $detail = MahasiswaDetail::where("nim", $user->nim)->first();
+        $jadwal = $this->param->getNow($detail->golongan, $detail->semester_sekarang, $detail->kode_prodi);
+        return $this->okApiResponse($jadwal, 'Berhasil Get Jadwal');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

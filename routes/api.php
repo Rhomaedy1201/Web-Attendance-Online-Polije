@@ -17,6 +17,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Jadwal
     Route::get('jadwal', [JadwalApiController::class, 'index'])->name('jadwal');
     Route::get('jadwal-all-day', [JadwalApiController::class, 'getAllDay'])->name('jadwal.day');
+    Route::get('jadwal-now', [JadwalApiController::class, 'getNow'])->name('jadwal.now');
 
     // Absen
     Route::post('/absen-masuk', [AbsensiController::class, 'masuk'])->name('absen.masuk');
