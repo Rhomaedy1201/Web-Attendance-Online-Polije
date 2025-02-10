@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AbsensiController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\JadwalApiController;
+use App\Http\Controllers\Api\MahasiswaApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // Absen
     Route::post('/absen-masuk', [AbsensiController::class, 'masuk'])->name('absen.masuk');
+
+    // Mahasiswa
+    Route::get('profile', [MahasiswaApiController::class,'index'])->name('profile');
 });
