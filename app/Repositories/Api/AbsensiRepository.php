@@ -83,4 +83,9 @@ class AbsensiRepository
 
         return $this->okApiResponse($absen, "Presensi masuk berhasil");
     }
+
+    public function absenPulang()
+    {
+        
+    }
 }

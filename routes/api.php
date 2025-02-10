@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AbsensiController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HistoryApiController;
 use App\Http\Controllers\Api\JadwalApiController;
 use App\Http\Controllers\Api\MahasiswaApiController;
 use Illuminate\Http\Request;
@@ -25,4 +26,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // Mahasiswa
     Route::get('profile', [MahasiswaApiController::class,'index'])->name('profile');
+
+    // History
+    Route::get('history', [HistoryApiController::class,'index'])->name('history');
 });
