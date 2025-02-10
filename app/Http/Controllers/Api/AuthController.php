@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\ApiResponse;
 use App\Models\Mahasiswa;
 use App\Models\MahasiswaDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -22,6 +23,12 @@ class AuthController extends Controller
 
         $user = Mahasiswa::where('nim', $request->nim)->first();
         $userDetail = MahasiswaDetail::where('nim', $request->nim)->with('mahasiswa')->first();
+
+        $token = DB::table('personal_access_tokens')->where('tokenable_id', $user->id)->first();
+
+        if (!is_null($token)) {
+            return $this->errorApiResponse("User sudah login, Silahkan logout dahulu.");
+        }
         
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'NIM atau password salah'], 401);
