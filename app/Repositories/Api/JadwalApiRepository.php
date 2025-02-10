@@ -66,7 +66,7 @@ class JadwalApiRepository
         })
         ->with('matkul.dosen')
         ->with('ruangan.jurusan')
-        ->get();
+        ->first();
 
         return $jadwal;
     }

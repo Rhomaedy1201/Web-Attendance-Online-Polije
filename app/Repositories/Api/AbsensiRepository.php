@@ -17,10 +17,12 @@ class AbsensiRepository
 {
     use ApiResponse;
     protected $model;
+    protected $repoJadwal;
 
-    public function __construct(Absensi $absen)
+    public function __construct(Absensi $absen, JadwalApiRepository $jadwal)
     {
         $this->model = $absen;
+        $this->repoJadwal = $jadwal;
     }
 
     public function absenMasuk(array $params, $nim)
@@ -36,15 +38,21 @@ class AbsensiRepository
         $detailMhs = MahasiswaDetail::where("nim", $user->nim)->first();
 
         // Cari jadwal berdasarkan hari ini
-        $jadwal = Jadwal::where([
-            'hari' => Str::lower($now->translatedFormat('l')),
-            'semester' => $detailMhs['semester_sekarang'],
-            'golongan' => $detailMhs['golongan'],
-            'kode_prodi'=> $detailMhs['kode_prodi'],
-        ])
-        ->orderBy('jam_masuk')
-        ->first();
+        $jadwal = $this->repoJadwal->getNow(
+            $detailMhs['golongan'],
+            $detailMhs['semester_sekarang'],
+            $detailMhs['kode_prodi'],
+        );
 
+        $absen = $this->model->where('id_jadwal', $jadwal->id)->first();
+
+        if ($absen->masuk != null) {
+            return $this->okApiResponse([], "Sudah Absen");
+        }else if ($absen->selesai != null) {
+            return $this->okApiResponse([]);
+        }
+
+        // return $jadwal;
         if (is_null($jadwal)) {
             throw new NotFoundHttpException("Jadwal tidak ditemukan");
         }
