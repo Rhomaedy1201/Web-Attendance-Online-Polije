@@ -33,7 +33,7 @@ class AbsensiRepository
         if ($nim != $user->nim) {
             return $this->okApiResponse("Wajah Tidak Sesuai");
         }
-
+        
         // Ambil detail mahasiswa
         $detailMhs = MahasiswaDetail::where("nim", $user->nim)->first();
 
@@ -43,13 +43,15 @@ class AbsensiRepository
             $detailMhs['semester_sekarang'],
             $detailMhs['kode_prodi'],
         );
-
+        
         $absen = $this->model->where('id_jadwal', $jadwal->id)->first();
 
-        if ($absen->masuk != null) {
-            return $this->okApiResponse([], "Sudah Absen");
-        }else if ($absen->selesai != null) {
-            return $this->okApiResponse([]);
+        if ($absen) {
+            if ($absen->masuk != null) {
+                return $this->okApiResponse([], "Sudah Absen");
+            }else if ($absen->selesai != null) {
+                return $this->okApiResponse([]);
+            }
         }
 
         // return $jadwal;

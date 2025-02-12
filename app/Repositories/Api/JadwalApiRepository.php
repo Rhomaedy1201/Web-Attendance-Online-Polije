@@ -51,8 +51,14 @@ class JadwalApiRepository
             ->where('golongan', $gol)
             ->where('hari', $hariIni);
         })
-        ->with('matkul.dosen')
-        ->with('ruangan.jurusan')
+        ->with([
+            'matkul.dosen',
+            'ruangan.jurusan',
+            'absensi' => function ($query) {
+                $query->select(['id', 'tanggal', 'nim', 'id_jadwal', 'masuk', 'selesai', 'status']);
+                // ->where('masuk' != null);
+            }
+        ])
         ->get()
         ->makeHidden(['created_at', 'updated_at'])
         ->each(function ($item) {

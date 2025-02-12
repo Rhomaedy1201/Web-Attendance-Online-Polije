@@ -42,4 +42,9 @@ class Jadwal extends Model
     {
         return $this->belongsTo(Prodi::class, 'kode_prodi','kode_prodi');
     }
+
+    public function absensi()
+    {
+        return $this->hasOne(Absensi::class, 'id_jadwal', 'id')->latest();
+    }
 }
