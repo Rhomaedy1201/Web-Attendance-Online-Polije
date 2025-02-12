@@ -28,7 +28,14 @@ class JadwalApiRepository
         })
         ->with('matkul.dosen')
         ->with('ruangan.jurusan')
-        ->get();
+        ->get()
+        ->makeHidden(['created_at', 'updated_at'])
+        ->each(function ($item) {
+            $item->matkul->makeHidden(['created_at', 'updated_at']);
+            $item->matkul->dosen->makeHidden(['created_at', 'updated_at']);
+            $item->ruangan->makeHidden(['created_at', 'updated_at']);
+            $item->ruangan->jurusan->makeHidden(['created_at', 'updated_at']);
+        });
 
         return $jadwal;
     }
@@ -46,7 +53,14 @@ class JadwalApiRepository
         })
         ->with('matkul.dosen')
         ->with('ruangan.jurusan')
-        ->get();
+        ->get()
+        ->makeHidden(['created_at', 'updated_at'])
+        ->each(function ($item) {
+            $item->matkul->makeHidden(['created_at', 'updated_at']);
+            $item->matkul->dosen->makeHidden(['created_at', 'updated_at']);
+            $item->ruangan->makeHidden(['created_at', 'updated_at']);
+            $item->ruangan->jurusan->makeHidden(['created_at', 'updated_at']);
+        });
 
         return $jadwal;
     }
@@ -67,6 +81,24 @@ class JadwalApiRepository
         ->with('matkul.dosen')
         ->with('ruangan.jurusan')
         ->first();
+
+        if ($jadwal) {
+            $jadwal->makeHidden(['created_at', 'updated_at']);
+            if ($jadwal->matkul) {
+                $jadwal->matkul->makeHidden(['created_at', 'updated_at']);
+    
+                if ($jadwal->matkul->dosen) {
+                    $jadwal->matkul->dosen->makeHidden(['created_at', 'updated_at']);
+                }
+            }
+            if ($jadwal->ruangan) {
+                $jadwal->ruangan->makeHidden(['created_at', 'updated_at']);
+    
+                if ($jadwal->ruangan->jurusan) {
+                    $jadwal->ruangan->jurusan->makeHidden(['created_at', 'updated_at']);
+                }
+            }
+        }
 
         return $jadwal;
     }
