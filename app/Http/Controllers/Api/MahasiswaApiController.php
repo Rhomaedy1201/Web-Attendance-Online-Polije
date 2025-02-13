@@ -12,7 +12,15 @@ class MahasiswaApiController extends Controller
     use ApiResponse;
     public function index(Request $request)
     {
-        $user = MahasiswaDetail::where('nim', $request->user()->nim)->with('mahasiswa')->first();
+        $user = MahasiswaDetail::where('nim', $request->user()->nim)
+        ->with('mahasiswa')
+        ->first();
+        if ($user) {
+            $user->makeHidden(['created_at', 'updated_at']);
+            if($user->mahasiswa){
+                $user->mahasiswa->makeHidden(['created_at','updated_at']);
+            }
+        }
         return $this->okApiResponse($user, 'Berhasil get profile');
     }
 }
