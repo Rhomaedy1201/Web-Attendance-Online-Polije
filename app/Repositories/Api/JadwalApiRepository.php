@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Api;
 
+use App\Models\Absensi;
 use App\Models\Jadwal;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -44,6 +45,8 @@ class JadwalApiRepository
     {
         Carbon::setLocale('id');
         $hariIni = Str::lower(Carbon::now()->translatedFormat('l'));
+        $tanggalSekarang = Carbon::now()->toDateString();
+        
         $jadwal = $this->model
         ->where(function($query) use ($gol, $smst, $kdProdi, $hariIni) {
             $query->where("kode_prodi", $kdProdi)
@@ -54,18 +57,20 @@ class JadwalApiRepository
         ->with([
             'matkul.dosen',
             'ruangan.jurusan',
-            'absensi' => function ($query) {
-                $query->select(['id', 'tanggal', 'nim', 'id_jadwal', 'masuk', 'selesai', 'status']);
-                // ->where('masuk' != null);
-            }
+            'absensi',
         ])
         ->get()
         ->makeHidden(['created_at', 'updated_at'])
-        ->each(function ($item) {
+        ->each(function ($item) use ($tanggalSekarang) {
             $item->matkul->makeHidden(['created_at', 'updated_at']);
             $item->matkul->dosen->makeHidden(['created_at', 'updated_at']);
             $item->ruangan->makeHidden(['created_at', 'updated_at']);
             $item->ruangan->jurusan->makeHidden(['created_at', 'updated_at']);
+            $item->absensi->makeHidden(['created_at', 'updated_at']);
+            
+            if ($item->absensi->tanggal != $tanggalSekarang) {
+                $item->setRelation('absensi', null);
+            }
         });
 
         return $jadwal;

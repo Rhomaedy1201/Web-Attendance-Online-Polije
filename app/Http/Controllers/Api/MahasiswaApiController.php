@@ -14,11 +14,15 @@ class MahasiswaApiController extends Controller
     {
         $user = MahasiswaDetail::where('nim', $request->user()->nim)
         ->with('mahasiswa')
+        ->with('prodi')
         ->first();
         if ($user) {
             $user->makeHidden(['created_at', 'updated_at']);
             if($user->mahasiswa){
                 $user->mahasiswa->makeHidden(['created_at','updated_at']);
+            }
+            if ($user->prodi) {
+                $user->prodi->makeHidden(['created_at','updated_at']);
             }
         }
         return $this->okApiResponse($user, 'Berhasil get profile');
