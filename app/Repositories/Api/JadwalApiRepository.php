@@ -66,11 +66,13 @@ class JadwalApiRepository
             $item->matkul->dosen->makeHidden(['created_at', 'updated_at']);
             $item->ruangan->makeHidden(['created_at', 'updated_at']);
             $item->ruangan->jurusan->makeHidden(['created_at', 'updated_at']);
-            $item->absensi->makeHidden(['created_at', 'updated_at']);
-            
-            if ($item->absensi->tanggal != $tanggalSekarang) {
-                $item->setRelation('absensi', null);
+            if ($item->absensi) {
+                $item->absensi->makeHidden(['created_at', 'updated_at']);
+                if ($item->absensi->tanggal != $tanggalSekarang) {
+                    $item->setRelation('absensi', null);
+                }
             }
+            
         });
 
         return $jadwal;
