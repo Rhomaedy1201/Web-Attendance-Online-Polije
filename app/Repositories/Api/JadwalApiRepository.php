@@ -113,14 +113,15 @@ class JadwalApiRepository
                     $jadwal->ruangan->jurusan->makeHidden(['created_at', 'updated_at']);
                 }
             }
-        }
-
-        if ($jadwal->absensi) {
-            $jadwal->absensi->makeHidden(['created_at', 'updated_at']);
-            if ($jadwal->absensi->tanggal != $tanggalSekarang) {
-                $jadwal->setRelation('absensi', null);
+            
+            if ($jadwal->absensi) {
+                $jadwal->absensi->makeHidden(['created_at', 'updated_at']);
+                if ($jadwal->absensi->tanggal != $tanggalSekarang) {
+                    $jadwal->setRelation('absensi', null);
+                }
             }
         }
+
 
 
         return $jadwal;
