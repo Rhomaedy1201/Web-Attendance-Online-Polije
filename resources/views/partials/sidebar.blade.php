@@ -71,12 +71,12 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item {{ Request::is('history-presensi') ? 'active' : '' }}">
+                {{-- <li class="nav-item {{ Request::is('history-presensi') ? 'active' : '' }}">
                     <a href="{{ route('history-presensi') }}">
                         <i class="fas fa-history"></i>
                         <p>History Presensi</p>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>
