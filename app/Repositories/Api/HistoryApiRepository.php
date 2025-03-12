@@ -19,9 +19,14 @@ class HistoryApiRepository
     public function getHistory($tgl){
         $history = $this->model
         ->where("tanggal", 'like',$tgl."%")
-        ->with('mahasiswa')
-        ->with('jadwal.matkul')
-        ->get();
+        ->with(["mahasiswa","jadwal.matkul"])
+        ->get()
+        ->makeHidden(['created_at', 'updated_at'])
+        ->each(function ($item) {
+            $item->mahasiswa->makeHidden(['created_at', 'updated_at']);
+            $item->jadwal->makeHidden(['created_at', 'updated_at']);
+            $item->jadwal->matkul->makeHidden(['created_at', 'updated_at']);
+        });
 
         return $history;
     }
