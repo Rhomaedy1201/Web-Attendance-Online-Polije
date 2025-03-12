@@ -29,6 +29,7 @@ class AbsensiRepository
     {
         $now = $params['dateNow'];
         $user = $params['user'];
+        $dateNow = $now->format("Y-m-d");
 
         if ($nim != $user->nim) {
             return $this->okApiResponse("Wajah Tidak Sesuai");
@@ -44,7 +45,7 @@ class AbsensiRepository
             $detailMhs['kode_prodi'],
         );
         
-        $absen = $this->model->where('id_jadwal', $jadwal->id)->first();
+        $absen = $this->model->where(['id_jadwal'=>$jadwal->id, "tanggal"=>$dateNow])->first();
 
         if ($absen) {
             if ($absen->masuk != null) {

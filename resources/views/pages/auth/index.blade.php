@@ -53,7 +53,7 @@
 						</div>
 					</div>
 					<div class="footer">
-						Copyright &copy; 2017 &mdash; Your Company 
+						Copyright &copy; 2025 &mdash; Politeknik Negeri Jember 
 					</div>
 				</div>
 			</div>
