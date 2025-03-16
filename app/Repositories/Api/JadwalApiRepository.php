@@ -29,6 +29,7 @@ class JadwalApiRepository
         })
         ->with('matkul.dosen')
         ->with('ruangan.jurusan')
+        ->orderByRaw("FIELD(hari, 'senin','selasa','rabu','kamis','jumat','sabtu')")
         ->get()
         ->makeHidden(['created_at', 'updated_at'])
         ->each(function ($item) {
