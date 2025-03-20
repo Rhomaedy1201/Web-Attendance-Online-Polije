@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\GolonganController;
 use App\Http\Controllers\JadwalController;
@@ -19,9 +20,7 @@ Route::middleware(['guest', 'web'])->group(function () {
 
 Route::middleware(['auth','web'])->group(function () {
     
-    Route::get('/', function () {
-        return view('pages.dashboard.index');
-    });
+    Route::get('/', [DashboardController::class, 'index']);
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     

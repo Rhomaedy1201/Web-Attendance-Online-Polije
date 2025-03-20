@@ -42,50 +42,50 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
 <script>
-    Circles.create({
-        id:'circles-1',
-        radius:45,
-        value:60,
-        maxValue:100,
-        width:7,
-        text: 5,
-        colors:['#f1f1f1', '#FF9E27'],
-        duration:400,
-        wrpClass:'circles-wrp',
-        textClass:'circles-text',
-        styleWrapper:true,
-        styleText:true
-    })
+    // Circles.create({
+    //     id:'circles-1',
+    //     radius:45,
+    //     value:60,
+    //     maxValue:100,
+    //     width:7,
+    //     text: 5,
+    //     colors:['#f1f1f1', '#FF9E27'],
+    //     duration:400,
+    //     wrpClass:'circles-wrp',
+    //     textClass:'circles-text',
+    //     styleWrapper:true,
+    //     styleText:true
+    // })
 
-    Circles.create({
-        id:'circles-2',
-        radius:45,
-        value:70,
-        maxValue:100,
-        width:7,
-        text: 36,
-        colors:['#f1f1f1', '#2BB930'],
-        duration:400,
-        wrpClass:'circles-wrp',
-        textClass:'circles-text',
-        styleWrapper:true,
-        styleText:true
-    })
+    // Circles.create({
+    //     id:'circles-2',
+    //     radius:45,
+    //     value:70,
+    //     maxValue:100,
+    //     width:7,
+    //     text: 36,
+    //     colors:['#f1f1f1', '#2BB930'],
+    //     duration:400,
+    //     wrpClass:'circles-wrp',
+    //     textClass:'circles-text',
+    //     styleWrapper:true,
+    //     styleText:true
+    // })
 
-    Circles.create({
-        id:'circles-3',
-        radius:45,
-        value:40,
-        maxValue:100,
-        width:7,
-        text: 12,
-        colors:['#f1f1f1', '#F25961'],
-        duration:400,
-        wrpClass:'circles-wrp',
-        textClass:'circles-text',
-        styleWrapper:true,
-        styleText:true
-    })
+    // Circles.create({
+    //     id:'circles-3',
+    //     radius:45,
+    //     value:40,
+    //     maxValue:100,
+    //     width:7,
+    //     text: 12,
+    //     colors:['#f1f1f1', '#F25961'],
+    //     duration:400,
+    //     wrpClass:'circles-wrp',
+    //     textClass:'circles-text',
+    //     styleWrapper:true,
+    //     styleText:true
+    // })
 
     var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
 

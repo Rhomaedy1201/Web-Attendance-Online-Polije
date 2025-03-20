@@ -20,6 +20,7 @@
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="{{ asset('template/assets/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('template/assets/css/atlantis.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('template/assets/css/demo.css') }}">
 </head>
 <body>
 	<div class="wrapper">
