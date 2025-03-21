@@ -60,6 +60,7 @@ class JadwalApiRepository
             'ruangan.jurusan',
             'absensi',
         ])
+        ->orderBy('jam_masuk','asc')
         ->get()
         ->makeHidden(['created_at', 'updated_at'])
         ->each(function ($item) use ($tanggalSekarang) {
