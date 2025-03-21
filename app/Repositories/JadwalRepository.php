@@ -26,6 +26,7 @@ class JadwalRepository
         })
         ->with('matkul.dosen')
         ->with('ruangan.jurusan')
+        ->orderByRaw("FIELD(hari, 'senin','selasa','rabu','kamis','jumat','sabtu')")
         ->get();
         return $jadwal;
     }
